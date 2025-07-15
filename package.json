@@ -1,0 +1,20 @@
+{
+  "name": "astro-leaflet",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/pascal-brand38/astro-leaflet#readme",
+  "bugs": {
+    "url": "https://github.com/pascal-brand38/astro-leaflet/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pascal-brand38/astro-leaflet.git"
+  },
+  "license": "MIT",
+  "author": "Pascal Brand",
+  "type": "esm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
