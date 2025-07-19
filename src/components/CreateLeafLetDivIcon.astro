@@ -6,19 +6,6 @@ type Props = { name: string, class: string}
 
 ---
 
+<!-- dummy component to call the constructor of the custom element create-leaflet-divicon,
+     which is defined in LeafLet.astro -->
 <create-leaflet-divicon data-props={JSON.stringify(Astro.props)} />
-
-<!-- <script>
-  import L from "leaflet"
-  import { astroLeafletIcons } from '../index'
-
-  class CreateLeafletDivIcon extends HTMLElement {
-    constructor() {
-      super()
-      const props = JSON.parse(this.dataset.props!)
-      astroLeafletIcons[props.name] = L.divIcon({className: props.class});
-    }
-  }
-
-  customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CreateLeafletDivIcon);
-</script> -->

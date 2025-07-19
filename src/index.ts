@@ -36,7 +36,8 @@ export function setDefaultProps(props: AstroLeafLetType) {
   props.options.markers = props.options.markers || []
 }
 
-/** contains the map once created, for each id */
+/** leaflet maps once document is loaded, for each id */
 export const astroLeafletMaps: { [id: string] : Map; } = {}
 
+/** icons created using */
 export const astroLeafletIcons: { [name: string]: Icon | DivIcon } = {}

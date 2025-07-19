@@ -25,13 +25,6 @@ const {
 >
   <div id={id}  {...props}>
     <slot/>
-    <script>
-      // document.getElementById('tata').init()
-      // document.querySelector( 'leaflet-map#tata' ).init()
-      // var project_list = document.getElementsByTagName( "tata" )[0]
-      // project_list.init()
-    </script>
-
   </div>
 </leaflet-map>
 
@@ -45,34 +38,33 @@ const {
       super()
       const options: AstroLeafLetOptionsType = JSON.parse(this.dataset.options!)
       const id: string = this.dataset.id!
-      console.log('NEW LeafletMap')
 
+      // create the map only when the document is loaded,
+      // so that markers are created
+      // cf. https://stackoverflow.com/questions/35805252/how-to-execute-a-script-when-the-custom-element-is-upgraded
       window.onload = function() {
-        // cf. https://stackoverflow.com/questions/35805252/how-to-execute-a-script-when-the-custom-element-is-upgraded
-        console.log('ONLOAD LeafletMap')
         let map = L.map(id)
-        console.log('astroLeafletMaps')
-        console.log(astroLeafletMaps)
-        console.log('end of astroLeafletMaps')
         astroLeafletMaps[id] = map
         map.setView(options.center!, options.zoom)
         L.tileLayer(options.tileLayer!, {attribution: options.attribution}).addTo(map)
 
+        // add markers
         if (options && options.markers) {
           options.markers.forEach((marker:AstroLeafLetMarkerType) => {
+            // add the icon marker, if not the default one
             if (marker.astroIconName) {
               if (!marker.options) {
                 marker.options = {}
               }
-              marker.options.icon = astroLeafletIcons[marker.astroIconName]
-              console.log(marker.options)
+              if (astroLeafletIcons && astroLeafletIcons[marker.astroIconName]) {
+                marker.options.icon = astroLeafletIcons[marker.astroIconName]
+              }
             }
 
             L.marker(marker.latlng, marker.options).addTo(map)
           })
         }
       }
-
     }
   }
 
@@ -82,10 +74,7 @@ const {
   class CreateLeafletDivIcon extends HTMLElement {
     constructor() {
       super()
-      console.log('NEW CreateLeafletDivIcon')
-
       const props = JSON.parse(this.dataset.props!)
-      console.log('props = ', props)
       astroLeafletIcons[props.name] = L.divIcon({className: props.class});
     }
   }
