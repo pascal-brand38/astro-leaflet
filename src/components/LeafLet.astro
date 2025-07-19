@@ -1,0 +1,95 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+
+import { setDefaultProps } from '../index'
+import type { AstroLeafLetType } from '../index'
+import "leaflet/dist/leaflet.css"
+
+type Props = AstroLeafLetType
+
+const enrichedProps = Astro.props
+setDefaultProps(enrichedProps)
+const {
+  options,
+  id= 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),
+  ...props
+} = enrichedProps
+
+---
+
+<leaflet-map
+  data-id={id}
+  data-options={JSON.stringify(options)}
+   {...props}
+>
+  <div id={id}  {...props}>
+    <slot/>
+    <script>
+      // document.getElementById('tata').init()
+      // document.querySelector( 'leaflet-map#tata' ).init()
+      // var project_list = document.getElementsByTagName( "tata" )[0]
+      // project_list.init()
+    </script>
+
+  </div>
+</leaflet-map>
+
+<script>
+  import L from "leaflet"
+  import { astroLeafletMaps, astroLeafletIcons } from '../index'
+  import type { AstroLeafLetOptionsType, AstroLeafLetMarkerType } from '../index'
+
+  class LeafletMap extends HTMLElement {
+    constructor() {
+      super()
+      const options: AstroLeafLetOptionsType = JSON.parse(this.dataset.options!)
+      const id: string = this.dataset.id!
+      console.log('NEW LeafletMap')
+
+      window.onload = function() {
+        // cf. https://stackoverflow.com/questions/35805252/how-to-execute-a-script-when-the-custom-element-is-upgraded
+        console.log('ONLOAD LeafletMap')
+        let map = L.map(id)
+        console.log('astroLeafletMaps')
+        console.log(astroLeafletMaps)
+        console.log('end of astroLeafletMaps')
+        astroLeafletMaps[id] = map
+        map.setView(options.center!, options.zoom)
+        L.tileLayer(options.tileLayer!, {attribution: options.attribution}).addTo(map)
+
+        if (options && options.markers) {
+          options.markers.forEach((marker:AstroLeafLetMarkerType) => {
+            if (marker.astroIconName) {
+              if (!marker.options) {
+                marker.options = {}
+              }
+              marker.options.icon = astroLeafletIcons[marker.astroIconName]
+              console.log(marker.options)
+            }
+
+            L.marker(marker.latlng, marker.options).addTo(map)
+          })
+        }
+      }
+
+    }
+  }
+
+  customElements.get('leaflet-map') || customElements.define("leaflet-map", LeafletMap);
+
+
+  class CreateLeafletDivIcon extends HTMLElement {
+    constructor() {
+      super()
+      console.log('NEW CreateLeafletDivIcon')
+
+      const props = JSON.parse(this.dataset.props!)
+      console.log('props = ', props)
+      astroLeafletIcons[props.name] = L.divIcon({className: props.class});
+    }
+  }
+
+  customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CreateLeafletDivIcon);
+
+</script>

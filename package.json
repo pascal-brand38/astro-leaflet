@@ -2,19 +2,34 @@
   "name": "astro-leaflet",
   "version": "0.0.1",
   "description": "",
-  "homepage": "https://github.com/pascal-brand38/astro-leaflet#readme",
-  "bugs": {
-    "url": "https://github.com/pascal-brand38/astro-leaflet/issues"
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pascal-brand38/astro-leaflet.git"
   },
-  "license": "MIT",
   "author": "Pascal Brand",
-  "type": "esm",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pascal-brand38/astro-leaflet/issues"
+  },
+  "homepage": "https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "files": [
+    "index.ts",
+    "src/**"
+  ],
+  "dependencies": {
+    "@types/leaflet": "^1.9.20",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.14",
+    "astro": "^5.12.0",
+    "typescript": "^5.8.3"
   }
 }
