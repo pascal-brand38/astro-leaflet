@@ -1,0 +1,111 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+
+import type { AstroLeafletType } from '../index'
+import "leaflet/dist/leaflet.css"
+
+function setDefaultProps(props: AstroLeafletType) {
+  props.options = props.options || {}
+  props.options.center = props.options.center || [ 30, 7 ]
+  props.options.zoom = props.options.zoom || 2
+  props.options.tileLayer = props.options.tileLayer || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  props.options.attribution = props.options.attribution || "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+
+  props.options.markers = props.options.markers || []
+}
+
+type Props = AstroLeafletType
+
+const enrichedProps = Astro.props
+setDefaultProps(enrichedProps)
+const {
+  options,
+  id= 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),
+  ...props
+} = enrichedProps
+
+---
+
+<astro-leaflet
+  data-id={id}
+  data-options={JSON.stringify(options)}
+>
+  <div id={id}  {...props}>
+    <slot/>
+  </div>
+</astro-leaflet>
+
+<script>
+  import L from "leaflet"
+  import type { AstroLeafletOptionsType, AstroLeafletMarkerType } from '../index'
+  import type { Icon, DivIcon } from 'leaflet'
+
+  const astroLeafletIcons: { [name: string]: Icon | DivIcon } = {}
+
+  // ***                               MANDATORY                                          ***
+  // *** CustomElementCreateLeafletIcon must be declared before CustomElementAstroLeaflet ***
+  // *** this ensures icons are created before the map, and so can be displayed           ***
+  class CustomElementCreateLeafletIcon extends HTMLElement {
+    constructor() {
+      super()
+      console.log('ICON CREATED')
+      const props = JSON.parse(this.dataset.props!)
+      astroLeafletIcons[props.name] = L.divIcon({className: props.class});
+    }
+  }
+  customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CustomElementCreateLeafletIcon);
+
+
+  class CustomElementAstroLeaflet extends HTMLElement {
+    map: any    // saved map
+
+    constructor() {
+      super()
+      const options: AstroLeafletOptionsType = JSON.parse(this.dataset.options!)
+      const id: string = this.dataset.id!
+      this.map = undefined
+
+      this.createMap(id, options)
+
+      // create the map only when the document is loaded,
+      // so that markers are created.
+      // this is in case CustomElementCreateLeafletIcon is defined after CustomElementAstroLeaflet
+      // cf. https://stackoverflow.com/questions/35805252/how-to-execute-a-script-when-the-custom-element-is-upgraded
+      // document.addEventListener("readystatechange", (event) => {
+      //   if (document.readyState !== 'complete') {
+      //     return
+      //   }
+      //   this.createMap(id, options)
+      // })
+    }
+
+    createMap(id: string, options:AstroLeafletOptionsType) {
+      let map = L.map(id)
+
+      map.setView(options.center!, options.zoom)
+      L.tileLayer(options.tileLayer!, {attribution: options.attribution}).addTo(map)
+
+      // add markers
+      if (options && options.markers) {
+        options.markers.forEach((marker:AstroLeafletMarkerType) => {
+          // add the icon marker, if not the default one
+          if (marker.astroIconName) {
+            if (!marker.options) {
+              marker.options = {}
+            }
+            if (astroLeafletIcons[marker.astroIconName]) {
+              marker.options.icon = astroLeafletIcons[marker.astroIconName]
+            }
+          }
+
+          L.marker(marker.latlng, marker.options).addTo(map)
+        })
+      }
+
+      // save the map
+      this.map = map
+    }
+  }
+  customElements.get('astro-leaflet') || customElements.define("astro-leaflet", CustomElementAstroLeaflet);
+</script>
