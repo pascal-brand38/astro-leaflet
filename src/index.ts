@@ -4,9 +4,6 @@
 import type { LatLngExpression, MarkerOptions, Map, Icon, DivIcon } from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
 
-export { default as LeafLet } from './components/LeafLet.astro'
-export { default as CreateLeafLetDivIcon } from './components/CreateLeafLetDivIcon.astro'
-
 export interface AstroLeafLetMarkerType {
   latlng: LatLngExpression,
   options?: MarkerOptions,
@@ -37,7 +34,13 @@ export function setDefaultProps(props: AstroLeafLetType) {
 }
 
 /** leaflet maps once document is loaded, for each id */
-export const astroLeafletMaps: { [id: string] : Map; } = {}
+export function getMap(id: string): Map {
+  let el = document.getElementById(id)
+  return el.parentElement.map
+}
 
 /** icons created using */
 export const astroLeafletIcons: { [name: string]: Icon | DivIcon } = {}
+
+export { default as LeafLet } from './components/LeafLet.astro'
+export { default as CreateLeafLetDivIcon } from './components/CreateLeafLetDivIcon.astro'

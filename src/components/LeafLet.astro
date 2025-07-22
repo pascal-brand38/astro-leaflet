@@ -21,7 +21,6 @@ const {
 <leaflet-map
   data-id={id}
   data-options={JSON.stringify(options)}
-   {...props}
 >
   <div id={id}  {...props}>
     <slot/>
@@ -30,21 +29,28 @@ const {
 
 <script>
   import L from "leaflet"
-  import { astroLeafletMaps, astroLeafletIcons } from '../index'
+  import { astroLeafletIcons } from '../index'
   import type { AstroLeafLetOptionsType, AstroLeafLetMarkerType } from '../index'
 
   class LeafletMap extends HTMLElement {
+    map: any    // saved map
+
     constructor() {
       super()
       const options: AstroLeafLetOptionsType = JSON.parse(this.dataset.options!)
       const id: string = this.dataset.id!
+      this.map = undefined
 
       // create the map only when the document is loaded,
       // so that markers are created
       // cf. https://stackoverflow.com/questions/35805252/how-to-execute-a-script-when-the-custom-element-is-upgraded
-      window.onload = function() {
+      document.addEventListener("readystatechange", (event) => {
+        console.log(`readystatechange: ${document.readyState}`)
+        if (document.readyState !== 'complete') {
+          return
+        }
         let map = L.map(id)
-        astroLeafletMaps[id] = map
+
         map.setView(options.center!, options.zoom)
         L.tileLayer(options.tileLayer!, {attribution: options.attribution}).addTo(map)
 
@@ -64,7 +70,11 @@ const {
             L.marker(marker.latlng, marker.options).addTo(map)
           })
         }
-      }
+
+        // save the map
+        this.map = map
+      })
+
     }
   }
 
