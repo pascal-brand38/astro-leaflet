@@ -37,7 +37,11 @@ const {
 </astro-leaflet>
 
 <script>
-  import L from "leaflet"
+  import {
+    divIcon as LdivIcon,
+    map as Lmap,
+    marker as Lmarker,
+    tileLayer as LtileLayer} from "leaflet/dist/leaflet-src.esm"
   import type { AstroLeafletOptionsType, AstroLeafletMarkerType } from '../index'
   import type { Icon, DivIcon } from 'leaflet'
 
@@ -51,7 +55,7 @@ const {
       super()
       console.log('ICON CREATED')
       const props = JSON.parse(this.dataset.props!)
-      astroLeafletIcons[props.name] = L.divIcon({className: props.class});
+      astroLeafletIcons[props.name] = LdivIcon({className: props.class});
     }
   }
   customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CustomElementCreateLeafletIcon);
@@ -81,10 +85,10 @@ const {
     }
 
     createMap(id: string, options:AstroLeafletOptionsType) {
-      let map = L.map(id)
+      let map = Lmap(id)
 
       map.setView(options.center!, options.zoom)
-      L.tileLayer(options.tileLayer!, {attribution: options.attribution}).addTo(map)
+      LtileLayer(options.tileLayer!, {attribution: options.attribution}).addTo(map)
 
       // add markers
       if (options && options.markers) {
@@ -99,7 +103,7 @@ const {
             }
           }
 
-          L.marker(marker.latlng, marker.options).addTo(map)
+          Lmarker(marker.latlng, marker.options).addTo(map)
         })
       }
 

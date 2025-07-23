@@ -1,7 +1,8 @@
 {
   "name": "astro-leaflet",
   "version": "0.1.0",
-  "description": "",
+  "description": "TODO",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,5 +32,8 @@
     "@types/node": "^24.0.14",
     "astro": "^5.12.0",
     "typescript": "^5.8.3"
-  }
+  },
+  "keywords": [
+    "TODO"
+  ]
 }
