@@ -22,8 +22,13 @@ setDefaultProps(enrichedProps)
 const {
   options,
   id= 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),
+  style: providedStyle,
+  class: className,
   ...props
 } = enrichedProps
+
+// if neither style nor class is provided, set a style so that the map is displayed
+const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (providedStyle || '')
 
 ---
 
@@ -31,7 +36,7 @@ const {
   data-id={id}
   data-options={JSON.stringify(options)}
 >
-  <div id={id}  {...props}>
+  <div id={id} style={style} class={className} {...props}>
     <slot/>
   </div>
 </astro-leaflet>
