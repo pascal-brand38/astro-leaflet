@@ -1,8 +1,13 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import type { LatLngExpression, MarkerOptions, Map } from 'leaflet'
+import type { LatLngExpression, MarkerOptions, DivIconOptions, Map } from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
+
+export interface AstroLeafletCreateIconType {
+  name: string,
+  options: Omit<DivIconOptions, 'icon'>,
+}
 
 export interface AstroLeafletMarkerType {
   latlng: LatLngExpression,

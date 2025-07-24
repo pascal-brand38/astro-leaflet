@@ -46,8 +46,10 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     divIcon as LdivIcon,
     map as Lmap,
     marker as Lmarker,
-    tileLayer as LtileLayer} from "leaflet/dist/leaflet-src.esm"
-  import type { AstroLeafletOptionsType, AstroLeafletMarkerType } from '../index'
+    tileLayer as LtileLayer
+  } from "leaflet/dist/leaflet-src.esm"
+  // } from "leaflet"
+  import type { AstroLeafletOptionsType, AstroLeafletMarkerType, AstroLeafletCreateIconType } from '../index'
   import type { Icon, DivIcon } from 'leaflet'
 
   const astroLeafletIcons: { [name: string]: Icon | DivIcon } = {}
@@ -58,9 +60,8 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
   class CustomElementCreateLeafletIcon extends HTMLElement {
     constructor() {
       super()
-      console.log('ICON CREATED')
-      const props = JSON.parse(this.dataset.props!)
-      astroLeafletIcons[props.name] = LdivIcon({className: props.class});
+      const props: AstroLeafletCreateIconType = JSON.parse(this.dataset.props!)
+      astroLeafletIcons[props.name] = LdivIcon(props.options);
     }
   }
   customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CustomElementCreateLeafletIcon);
