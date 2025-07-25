@@ -7,10 +7,14 @@ import "leaflet/dist/leaflet.css"
 
 function setDefaultProps(props: AstroLeafletType) {
   props.options = props.options || {}
+  props.options.tileLayerOptions = props.options.tileLayerOptions || {}
   props.options.center = props.options.center || [ 30, 7 ]
   props.options.zoom = props.options.zoom || 2
-  props.options.tileLayer = props.options.tileLayer || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  props.options.attribution = props.options.attribution || "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+  if (!props.options.tileLayer) {
+    props.options.tileLayer = props.options.tileLayer || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    props.options.tileLayerOptions.subdomains = [ 'a', 'b', 'c' ]
+    props.options.tileLayerOptions.attribution = props.options.tileLayerOptions.attribution || "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+  }
 
   props.options.markers = props.options.markers || []
 }
@@ -93,8 +97,8 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     createMap(id: string, options:AstroLeafletOptionsType) {
       let map = Lmap(id)
 
-      map.setView(options.center!, options.zoom)
-      LtileLayer(options.tileLayer!, {attribution: options.attribution}).addTo(map)
+      map.setView(options.center!, options.zoom, options.setViewOptions)
+      LtileLayer(options.tileLayer!, options.tileLayerOptions).addTo(map)
 
       // add markers
       if (options && options.markers) {

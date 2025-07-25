@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import type { LatLngExpression, MarkerOptions, DivIconOptions, Map } from 'leaflet'
+import type { LatLngExpression, MarkerOptions, DivIconOptions, Map, TileLayerOptions, ZoomPanOptions, } from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
 
 export interface AstroLeafletCreateIconType {
@@ -18,9 +18,10 @@ export interface AstroLeafletMarkerType {
 export interface AstroLeafletOptionsType {
   center?: LatLngExpression,
   zoom?: number,
-  tileLayer?: string
-  /** Most tile servers require attribution. */
-  attribution?: string
+  tileLayer?: string,
+
+  setViewOptions?: ZoomPanOptions,
+  tileLayerOptions?: TileLayerOptions,
   markers?: AstroLeafletMarkerType[]
 }
 
