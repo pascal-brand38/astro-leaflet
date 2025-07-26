@@ -1,6 +1,20 @@
 ---
 // Copyright (c) Pascal Brand
 // MIT License
+//
+// Create an icon, to be used as a marker in leaflet
+// Custom Element is created in Leaflet.astro
+//
+// Example
+//    <CreateLeafletIcon name='myicon-name' options={{className:"leaflet-icon-myicon", iconSize: [20,20]}}/>
+//
+//    <style is:global>
+//    	.leaflet-icon-myicon {
+//    		background:red;
+//    		border:5px solid rgba(255,255,255,0.5);
+//    		border-radius:50%;
+//    	}
+//    </style>
 
 import type { AstroLeafletCreateIconType } from '../index'
 
