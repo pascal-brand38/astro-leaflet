@@ -1,6 +1,6 @@
 {
   "name": "astro-leaflet",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Leaflet astro component, to display maps: googlemaps, openstreetmap, google maps,...",
   "type": "module",
   "main": "index.js",
