@@ -1,7 +1,7 @@
 {
   "name": "astro-leaflet",
   "version": "0.2.0",
-  "description": "Leaflet astro component, to display maps",
+  "description": "Leaflet astro component, to display maps: googlemaps, openstreetmap, google maps,...",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -34,6 +34,12 @@
     "typescript": "^5.8.3"
   },
   "keywords": [
-    "TODO"
+    "leaflet",
+    "withastro",
+    "astro-component",
+    "map",
+    "Google Map",
+    "googlemap",
+    "openstreetmap"
   ]
 }
