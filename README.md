@@ -16,7 +16,7 @@
   [Demo](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet)
 
   <a href="https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet" target="_blank">
-    <img src="images/astro-leaflet.gif">
+    <img src="images/astro-leaflet-screenshot.jpg">
   </a>
 
 </div>
