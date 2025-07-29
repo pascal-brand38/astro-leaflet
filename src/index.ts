@@ -76,7 +76,7 @@ declare class _CustomElementAstroLeaflet extends HTMLElement {
 
 /** get leaflet map associated with an id.
  *  Available once the document is loaded */
-export function getMap(id: string): Map |undefined {
+export function getMapFromId(id: string): Map | undefined {
   let el = document.getElementById(id)
   console.error(`astro-leaflet::getMap: id ${id} does not exist`)
   if (!el || !el.parentElement) {
@@ -90,7 +90,26 @@ export function getMap(id: string): Map |undefined {
   }
 }
 
+/** get leaflet map, whose element is inside this <astro-leaflet> */
+export function getMapFromElement(el: HTMLElement): Map | undefined {
+  let parent: HTMLElement | null = el
+  while (parent) {
+    if (parent.tagName === 'ASTRO-LEAFLET') {
+      const customElementLeafletMap: _CustomElementAstroLeaflet = (parent as _CustomElementAstroLeaflet)
+      if (!customElementLeafletMap.map) {
+        console.error(`astro-leaflet::getMapFromElement(): no leaflet map associated with`)
+        return undefined
+      }
+      return customElementLeafletMap.map
+    }
+    parent = parent.parentElement
+  }
+  console.error('astro-leaflet::getMapFromElement() failed - cannot find ASTRO-LEAFLET custom element')
+  return undefined
+}
+
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
 export { default as Polyline } from './components/Polyline.astro'
+export { default as FitBounds } from './components/FitBounds.astro'

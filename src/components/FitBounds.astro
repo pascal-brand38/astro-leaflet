@@ -7,17 +7,15 @@
 //
 // Example
 //    <Leaflet options={options}>
-//      <Polyline latlngs={data as LatLngTuple[]} options={{color: 'red'}} />
+//      <Polyline latlngs={data as LatLngTuple[]} options={{color: 'red'}}>
+//        <FitBounds/>
+//      </Polyline>
 //    </Leaflet>
-
-import type { AstroLeafletPolylineType } from '../index'
-
-type Props = AstroLeafletPolylineType
 
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-polyline,
      which is defined in Leaflet.astro -->
-<astro-leaflet-polyline data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-fitbounds>
   <slot />
-</astro-leaflet-polyline>
+</astro-leaflet-fitbounds>
