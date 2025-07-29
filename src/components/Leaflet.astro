@@ -54,8 +54,8 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
   data-options={JSON.stringify(options)}
 >
   <div id={id} style={style} class={className} {...props}>
-    <slot/>
   </div>
+  <slot/>
 </astro-leaflet>
 
 <script>
@@ -65,10 +65,16 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     marker as Lmarker,
     tileLayer as LtileLayer,
     icon as Licon,
+    polyline as Lpolyline,
   } from "leaflet/dist/leaflet-src.esm"
   // } from "leaflet"
-  import type { AstroLeafletOptionsType, AstroLeafletMarkerType, AstroLeafletCreateIconType } from '../index'
-  import type { Icon, DivIcon } from 'leaflet'
+  import type {
+    AstroLeafletOptionsType,
+    AstroLeafletMarkerType,
+    AstroLeafletCreateIconType,
+    AstroLeafletPolylineType,
+  } from '../index'
+  import type { Icon, DivIcon, Map } from 'leaflet'
 
   // fix leaflet bug: default icon not displayed in production
   // https://stackoverflow.com/questions/41144319/leaflet-marker-not-found-production-env/76454369#76454369
@@ -101,7 +107,7 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     /** The map, once created. Can be accessed using    getMap(id),
      * which is summarized by                           document.getElementById(id).map
      */
-    map: any    // saved map
+    map: Map | undefined    // saved map
 
     constructor() {
       super()
@@ -156,4 +162,20 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     }
   }
   customElements.get('astro-leaflet') || customElements.define("astro-leaflet", CustomElementAstroLeaflet);
+
+
+  class CustomElementPolyline extends HTMLElement {
+    constructor() {
+      super()
+      const props: AstroLeafletPolylineType = JSON.parse(this.dataset.props!)
+      const parent: CustomElementAstroLeaflet = this.parentElement as CustomElementAstroLeaflet  // this is the <astro-leaflet> that contains the map
+      const map: Map | undefined = parent.map
+      if (map) {
+        Lpolyline(props.latlngs, props.options).addTo(map!);
+      }
+    }
+  }
+  customElements.get('astro-leaflet-polyline') || customElements.define("astro-leaflet-polyline", CustomElementPolyline);
+
+
 </script>

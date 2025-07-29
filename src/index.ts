@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import type { LatLngExpression, MarkerOptions, DivIconOptions, Map, TileLayerOptions, ZoomPanOptions, } from 'leaflet'
+import type { LatLngExpression, MarkerOptions, DivIconOptions, Map, TileLayerOptions, ZoomPanOptions, PolylineOptions, } from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
 
 /** Type to create an icon to be used in leaflet markers.
@@ -60,6 +60,14 @@ export interface AstroLeafletType extends HTMLAttributes<"div"> {
   options?: AstroLeafletOptionsType
 }
 
+/** arguments provided in ```<Polyline .../>```. */
+export interface AstroLeafletPolylineType {
+  /** list of positions, to draw the polyline */
+  latlngs: LatLngExpression[] | LatLngExpression[][],
+  /** leaflet options of the polyline: color,... */
+  options?: PolylineOptions,
+}
+
 /** custom element internal declaration of the custom element created by ```<Leaflet ...>```. */
 declare class _CustomElementAstroLeaflet extends HTMLElement {
   /** leaflet map. undefined till the html is loaded */
@@ -85,3 +93,4 @@ export function getMap(id: string): Map |undefined {
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
+export { default as Polyline } from './components/Polyline.astro'
