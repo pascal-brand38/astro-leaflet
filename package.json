@@ -1,6 +1,6 @@
 {
   "name": "astro-leaflet",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Leaflet astro component, to display maps: googlemaps, openstreetmap, google maps,...",
   "type": "module",
   "main": "index.js",
@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/pascal-brand38/astro-leaflet/issues"
   },
-  "homepage": "https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet",
+  "homepage": "https://github.com/pascal-brand38/astro-leaflet",
   "exports": {
     ".": "./index.ts"
   },
