@@ -155,6 +155,9 @@ Usage:
 </style>
 ```
 
+Full example can be found at:
+* [Google Earth and markers](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#google-map-markers)
+
 
 ## Complex Examples
 
