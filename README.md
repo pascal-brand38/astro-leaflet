@@ -53,6 +53,30 @@ import { Leaflet } from "astro-leaflet";
 <Leaflet />
 ```
 
+# Components:
+
+## \<LeafLet>
+
+Main component to create a leaflet map.
+
+Usage:
+```
+<Leaflet options={{...}}>
+</leaflet>
+```
+
+with the following option properties:
+* tileLayer: string url of the main tile layer. Default is the one of openstreetmap
+* tileLayerOptions: [Leaflet options](https://leafletjs.com/reference.html#tilelayer-minzoom)
+  to set the attribution,...
+* center: array of latitude and longitude. Default is centered on south europe
+* zoom: a number for the zoom. Default is 2, that is a far view
+* markers: an array of ```AstroLeafletMarkerType```
+
+Full examples can be found at:
+* [Minimal usage of ```\<Leaflet>```]()
+* [Google Earth and markers]()
+
 ## Complex Examples
 
 Please check the [online doc](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet) for a fullset of examples.
