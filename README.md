@@ -74,8 +74,87 @@ with the following option properties:
 * markers: an array of ```AstroLeafletMarkerType```
 
 Full examples can be found at:
-* [Minimal usage of ```\<Leaflet>```]()
-* [Google Earth and markers]()
+* [Minimal usage of ```<Leaflet>```](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#minimal)
+* [Google Earth and markers](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#google-map-markers)
+
+
+## \<TileLayer>
+
+Component to add a layer on top of the main layer. This can
+be usefull for example to display labels on top of satellite images.
+Must be implemented in the ```<Leaflet>``` slot.
+
+Usage:
+```
+<TileLayer
+  urlTemplate='url of the tiles to overlay
+  options={{ leaflet options of tileLayer() }}>
+```
+
+Full example can be found at:
+* [NYC Marathon](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#NYC-Marathon)
+
+
+## \<Polyline>
+
+Components to draw polyline overlays on a map.
+Must be implemented in the ```<Leaflet>``` slot.
+
+
+Usage:
+```
+<Polyline
+  latlngs={array of LatLngTuple[]}
+  options={{  leaflet options of polyline() }}>
+```
+
+Full example can be found at:
+* [NYC Marathon](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#NYC-Marathon)
+
+
+
+## \<FitBounds>
+
+Components to automatically center the map on elements
+of the map, such as the points of a polyline.
+Must be in the slot of the element to center to.
+
+```
+<FitBounds/>
+```
+
+Full example can be found at:
+* [NYC Marathon](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#NYC-Marathon)
+
+
+## \<CreateLeafletIcon>
+
+Create a custom icon to be displayed in markers.
+Must be implemented before the ```<Leaflet>``` slot.
+
+Note that only divicons are supported for the time-being.
+
+Usage:
+```
+<CreateLeafletIcon
+  name='name of the icon to be used in markers'
+  options={{
+    className:"leaflet-icon-myicon",
+    iconSize: [20,20]
+    ...
+  }}/>
+<Leaflet options={options}/>
+
+<style is:global>
+	/* class definition used to define the custom icon */
+	.leaflet-icon-myicon {
+		background:red;
+		border:5px solid rgba(255,255,255,0.5);
+		border-radius:50%;
+	}
+</style>
+```
+
 
 ## Complex Examples
 
