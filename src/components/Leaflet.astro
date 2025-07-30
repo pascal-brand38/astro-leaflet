@@ -74,12 +74,14 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     AstroLeafletMarkerType,
     AstroLeafletCreateIconType,
     AstroLeafletPolylineType,
+    AstroLeafletTileLayerType,
   } from '../index'
   import type {
     Icon,
     DivIcon,
     Map,
     Polyline,
+    TileLayer,
   } from 'leaflet'
 
   // fix leaflet bug: default icon not displayed in production
@@ -187,6 +189,21 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     }
   }
   customElements.get('astro-leaflet-polyline') || customElements.define("astro-leaflet-polyline", CustomElementPolyline);
+
+
+  class CustomElementTileLayer extends HTMLElement {
+    leafletElement: TileLayer | undefined
+
+    constructor() {
+      super()
+      const props: AstroLeafletTileLayerType = JSON.parse(this.dataset.props!)
+      const map = getMapFromElement(this)
+      if (map) {
+        this.leafletElement = LtileLayer(props.urlTemplate, props.options).addTo(map!);
+      }
+    }
+  }
+  customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
 
 
   class CustomElementFitBounds extends HTMLElement {

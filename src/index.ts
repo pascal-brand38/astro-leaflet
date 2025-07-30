@@ -1,7 +1,15 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import type { LatLngExpression, MarkerOptions, DivIconOptions, Map, TileLayerOptions, ZoomPanOptions, PolylineOptions, } from 'leaflet'
+import type {
+  LatLngExpression,
+  MarkerOptions,
+  DivIconOptions,
+  Map,
+  TileLayerOptions,
+  ZoomPanOptions,
+  PolylineOptions,
+} from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
 
 /** Type to create an icon to be used in leaflet markers.
@@ -68,6 +76,14 @@ export interface AstroLeafletPolylineType {
   options?: PolylineOptions,
 }
 
+/** arguments provided in ```<TileLayer .../>```. */
+export interface AstroLeafletTileLayerType {
+  /** url of the tiles, such as 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' */
+  urlTemplate: string,
+  /** leaflet options of the tilelayer: opacity,... */
+  options?: TileLayerOptions,
+}
+
 /** custom element internal declaration of the custom element created by ```<Leaflet ...>```. */
 declare class _CustomElementAstroLeaflet extends HTMLElement {
   /** leaflet map. undefined till the html is loaded */
@@ -113,3 +129,4 @@ export { default as Leaflet } from './components/Leaflet.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
 export { default as Polyline } from './components/Polyline.astro'
 export { default as FitBounds } from './components/FitBounds.astro'
+export { default as TileLayer } from './components/TileLayer.astro'

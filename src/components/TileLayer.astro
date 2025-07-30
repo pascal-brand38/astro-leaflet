@@ -1,0 +1,31 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+//
+// Add a tile layer on the map
+// Must be used in the <slot> part of <Leaflet>
+//
+// Example
+//    <Leaflet options={options}>
+//      <TyleLayer
+//        urlTemplate'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+//        options={{
+//            opacity: 0.5,
+//            maxZoom: 20,
+//            subdomains:['mt0','mt1','mt2','mt3']
+//          }}
+//        />
+//      <Polyline latlngs={data as LatLngTuple[]} options={{color: 'red'}} />
+//    </Leaflet>
+
+import type { AstroLeafletTileLayerType } from '../index'
+
+type Props = AstroLeafletTileLayerType
+
+---
+
+<!-- dummy component to call the constructor of the custom element astro-leaflet-tilelayer,
+     which is defined in Leaflet.astro -->
+<astro-leaflet-tilelayer data-props={JSON.stringify(Astro.props)} >
+  <slot />
+</astro-leaflet-tilelayer>
