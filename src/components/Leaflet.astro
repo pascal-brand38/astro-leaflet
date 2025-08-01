@@ -138,7 +138,7 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     }
 
     createMap(id: string, options:AstroLeafletOptionsType) {
-      let map = Lmap(id)
+      let map = Lmap(id, options.mapOptions)
 
       map.setView(options.center!, options.zoom, options.setViewOptions)
       LtileLayer(options.tileLayer!, options.tileLayerOptions).addTo(map)
@@ -215,7 +215,6 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
       if (map) {
         // take the parent. cast to a polyline, even if not, just to check access to leafletElement
         const parent = this.parentElement as CustomElementLeafletGeneric | undefined
-        console.info(parent)
         if (parent && parent.leafletElement && parent.leafletElement.getBounds) {
           map.fitBounds(parent.leafletElement.getBounds())
         } else {

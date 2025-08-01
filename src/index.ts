@@ -6,6 +6,7 @@ import type {
   MarkerOptions,
   DivIconOptions,
   Map,
+  MapOptions,
   TileLayerOptions,
   ZoomPanOptions,
   PolylineOptions,
@@ -48,6 +49,9 @@ export interface AstroLeafletOptionsType {
 
   /** tile url to be used. When not provided, uses ```https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png``` */
   tileLayer?: string,
+
+  /** ```<Leaflet...>``` is calling leaflet ```map()``` function with options ```mapOptions``` */
+  mapOptions?: MapOptions,
 
   /** ```<Leaflet...>``` is calling leaflet ```setView()``` function with options ```setViewOptions``` */
   setViewOptions?: ZoomPanOptions,
@@ -94,8 +98,8 @@ declare class _CustomElementAstroLeaflet extends HTMLElement {
  *  Available once the document is loaded */
 export function getMapFromId(id: string): Map | undefined {
   let el = document.getElementById(id)
-  console.error(`astro-leaflet::getMap: id ${id} does not exist`)
   if (!el || !el.parentElement) {
+    console.error(`astro-leaflet::getMap: id ${id} does not exist`)
     return undefined
   } else {
     const customElementLeafletMap: _CustomElementAstroLeaflet = (el.parentElement as _CustomElementAstroLeaflet)
