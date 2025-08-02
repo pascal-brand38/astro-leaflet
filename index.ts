@@ -2,3 +2,4 @@
 // MIT License
 
 export * from "./src/"
+export * from "./src/layerFromName"
