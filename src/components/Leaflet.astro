@@ -15,7 +15,7 @@
 //    }}/>
 
 import type { AstroLeafletType,  } from '../index'
-import { getLayerOptionsFromName } from '../layerFromName'
+import { getLayerOptionsFromName, mergeTileLayerOptions } from '../layerFromName'
 import "leaflet/dist/leaflet.css"
 
 // set default properties
@@ -39,12 +39,10 @@ const enrichedProps: AstroLeafletType = Astro.props
 enrichedProps.options = enrichedProps.options || {}
 if (enrichedProps.options.tileByName) {
   const layerFromName = getLayerOptionsFromName(enrichedProps.options.tileByName)
-  enrichedProps.options.tileLayerOptions = enrichedProps.options.tileLayerOptions || {}
   enrichedProps.options.tileLayer = layerFromName.tileLayer
-  Object.keys(layerFromName.options).forEach(key =>
-    enrichedProps.options!.tileLayerOptions![key] = enrichedProps.options!.tileLayerOptions![key] || layerFromName.options[key]
-  )
+  enrichedProps.options.tileLayerOptions = mergeTileLayerOptions(enrichedProps.options.tileLayerOptions, layerFromName.options)
 }
+
 setDefaultProps(enrichedProps)
 
 const {

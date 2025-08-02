@@ -60,3 +60,14 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
 
   return getLayerOptionsFromName('Google&type=street')   // default return
 }
+
+
+export function mergeTileLayerOptions(providedOptions: TileLayerOptions | undefined, guessedOptions: TileLayerOptions): TileLayerOptions {
+  if (!providedOptions) {
+    providedOptions = {}
+  }
+  Object.keys(guessedOptions).forEach(key =>
+    providedOptions[key] = providedOptions[key] || guessedOptions[key]
+  )
+  return providedOptions
+}

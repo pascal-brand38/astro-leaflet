@@ -85,13 +85,31 @@ export interface AstroLeafletPolylineType {
   options?: PolylineOptions,
 }
 
-/** arguments provided in ```<TileLayer .../>```. */
-export interface AstroLeafletTileLayerType {
-  /** url of the tiles, such as 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' */
-  urlTemplate: string,
+
+interface _AstroLeafletTileLayerOptionsType {
   /** leaflet options of the tilelayer: opacity,... */
   options?: TileLayerOptions,
 }
+
+interface _AstroLeafletTileLayerByNameType extends _AstroLeafletTileLayerOptionsType {
+  /** name of the tile to display, as used by getLayerOptionsFromName() */
+  tileByName: LayerNamesType,
+
+  /** urlTemplate or tileByName, but not both */
+  urlTemplate?: never,
+}
+
+interface _AstroLeafletTileLayerByUrlType extends _AstroLeafletTileLayerOptionsType {
+  /** url of the tiles, such as 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}' */
+  urlTemplate: string,
+
+  /** urlTemplate or tileByName, but not both */
+  tileByName?: never,
+}
+
+/** arguments provided in ```<TileLayer .../>```. */
+export type AstroLeafletTileLayerType = _AstroLeafletTileLayerByNameType | _AstroLeafletTileLayerByUrlType
+
 
 /** custom element internal declaration of the custom element created by ```<Leaflet ...>```. */
 declare class _CustomElementAstroLeaflet extends HTMLElement {
