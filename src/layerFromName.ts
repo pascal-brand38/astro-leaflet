@@ -35,7 +35,7 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
   }
 
   if (name.startsWith('Google')) {
-    const corresp = { 'satellite': 's', 'street': 'm', 'terrain': 'p', 'hybrid': 'h', }
+    const corresp = { 'satellite': 's', 'street': 'm', 'terrain': 'p', 'hybrid': 's,h', }
     let lyrs = '&lyrs=s'    // default is satellite view
     let lang = ''           // default does not define any language
 

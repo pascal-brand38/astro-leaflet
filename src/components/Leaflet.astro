@@ -14,7 +14,8 @@
 //    	}
 //    }}/>
 
-import type { AstroLeafletType } from '../index'
+import type { AstroLeafletType,  } from '../index'
+import { getLayerOptionsFromName } from '../layerFromName'
 import "leaflet/dist/leaflet.css"
 
 // set default properties
@@ -34,8 +35,18 @@ function setDefaultProps(props: AstroLeafletType) {
 
 type Props = AstroLeafletType
 
-const enrichedProps = Astro.props
+const enrichedProps: AstroLeafletType = Astro.props
+enrichedProps.options = enrichedProps.options || {}
+if (enrichedProps.options.tileByName) {
+  const layerFromName = getLayerOptionsFromName(enrichedProps.options.tileByName)
+  enrichedProps.options.tileLayerOptions = enrichedProps.options.tileLayerOptions || {}
+  enrichedProps.options.tileLayer = layerFromName.tileLayer
+  Object.keys(layerFromName.options).forEach(key =>
+    enrichedProps.options!.tileLayerOptions![key] = enrichedProps.options!.tileLayerOptions![key] || layerFromName.options[key]
+  )
+}
 setDefaultProps(enrichedProps)
+
 const {
   options,
   id= 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),

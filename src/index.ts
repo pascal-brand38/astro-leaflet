@@ -13,6 +13,8 @@ import type {
 } from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
 
+import type { LayerNamesType } from './layerFromName'
+
 /** Type to create an icon to be used in leaflet markers.
  * This type is used in ```<CreateLeafletIcon .../>```
  * Current limitation: only divIcon can be created directly
@@ -49,6 +51,9 @@ export interface AstroLeafletOptionsType {
 
   /** tile url to be used. When not provided, uses ```https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png``` */
   tileLayer?: string,
+
+  /** TODO */
+  tileByName?: LayerNamesType,
 
   /** ```<Leaflet...>``` is calling leaflet ```map()``` function with options ```mapOptions``` */
   mapOptions?: MapOptions,
