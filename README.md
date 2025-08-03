@@ -58,6 +58,10 @@ import { Leaflet } from "astro-leaflet";
 ## \<LeafLet>
 
 Main component to create a leaflet map.
+Check following examples (code is provided):
+* [Minimal usage of ```<Leaflet>```](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#minimal)
+* [Google Earth and markers](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#google-map-markers)
+
 
 Usage:
 ```
@@ -66,17 +70,45 @@ Usage:
 ```
 
 with the following option properties:
-* tileLayer: string url of the main tile layer. Default is the one of openstreetmap
-* tileLayerOptions: [Leaflet options](https://leafletjs.com/reference.html#tilelayer-minzoom)
+* ```tileByName```: name of the layer to display.
+  Section [tileByName](#tileByName) gives more details on this parameter,
+  and its possible values
+* tileLayer: if ```tileByName``` is not provided, this is the
+  url of the main tile layer. Default is the one of openstreetmap when neither
+  ```tileByName``` nor ```tileLayer``` is provided.
+* ```tileLayerOptions```: [Leaflet options](https://leafletjs.com/reference.html#tilelayer-minzoom)
   to set the attribution,...
-* center: array of latitude and longitude. Default is centered on south europe
-* zoom: a number for the zoom. Default is 2, that is a far view
-* markers: an array of ```AstroLeafletMarkerType```
+* ```center```: array of latitude and longitude. Default is centered on south europe
+* ```zoom```: a number for the zoom. Default is 2, that is a far view
+* ```markers```: an array of ```AstroLeafletMarkerType```
 
-Full examples can be found at:
-* [Minimal usage of ```<Leaflet>```](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#minimal)
-* [Google Earth and markers](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#google-map-markers)
 
+### <a name="tileByName"></a> tileByName
+
+This parameter is used in ```<LeafLet>``` and ```<TileLayer>```.
+This is a friendly name to infer url address of the layer, as well as
+the associated options, such as subdomains,...
+
+Please check
+[astro-dev](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#SelectLayer)
+to list and see current friendly names.
+
+Here is a non-exhaustive list:
+* ```OSM```
+* ```Google```: default is satellite
+  * ```Google&type=satellite```
+  * ```Google&type=street```
+  * ```Google&type=hybrid```
+  * ```Google&type=terrain```
+  * The lanugage can also be provided adding ```&lang=xx```,
+  such as for example ```Google&type=street&lang=en```
+* Michelin: default is map
+  * ```Michelin&map```
+  * ```Michelin&label```
+
+<br>
+
+___________________________________
 
 ## \<TileLayer>
 
@@ -94,6 +126,9 @@ Usage:
 Full example can be found at:
 * [NYC Marathon](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#NYC-Marathon)
 
+<br>
+
+___________________________________
 
 ## \<Polyline>
 
@@ -112,6 +147,9 @@ Full example can be found at:
 * [NYC Marathon](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#NYC-Marathon)
 
 
+<br>
+
+___________________________________
 
 ## \<FitBounds>
 
@@ -126,6 +164,10 @@ Must be in the slot of the element to center to.
 Full example can be found at:
 * [NYC Marathon](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#NYC-Marathon)
 
+
+<br>
+
+___________________________________
 
 ## \<CreateLeafletIcon>
 
@@ -158,6 +200,10 @@ Usage:
 Full example can be found at:
 * [Google Earth and markers](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#google-map-markers)
 
+
+<br>
+
+___________________________________
 
 ## Complex Examples
 
