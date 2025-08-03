@@ -52,7 +52,7 @@ export interface AstroLeafletOptionsType {
   /** tile url to be used. When not provided, uses ```https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png``` */
   tileLayer?: string,
 
-  /** TODO */
+  /** friendly name of the lyer, such as Google&type=satellite */
   tileByName?: LayerNamesType,
 
   /** ```<Leaflet...>``` is calling leaflet ```map()``` function with options ```mapOptions``` */

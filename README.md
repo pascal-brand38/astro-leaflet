@@ -70,7 +70,9 @@ Usage:
 ```
 
 with the following option properties:
-* ```tileByName```: name of the layer to display.
+* ```tileByName```: friendly name of the layer to display.
+  Check [astro-dev](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#SelectLayer)
+  for an interactive description and display of implemented human friendly name.
   Section [tileByName](#tileByName) gives more details on this parameter,
   and its possible values
 * tileLayer: if ```tileByName``` is not provided, this is the
@@ -78,9 +80,18 @@ with the following option properties:
   ```tileByName``` nor ```tileLayer``` is provided.
 * ```tileLayerOptions```: [Leaflet options](https://leafletjs.com/reference.html#tilelayer-minzoom)
   to set the attribution,...
+*  ```mapOptions```: [Leaflet options](https://leafletjs.com/reference.html#map-prefercanvas)
+*  ```setViewOptions```: [Leaflet options](https://leafletjs.com/reference.html#zoom/pan-options)
 * ```center```: array of latitude and longitude. Default is centered on south europe
 * ```zoom```: a number for the zoom. Default is 2, that is a far view
 * ```markers```: an array of ```AstroLeafletMarkerType```
+
+<br>
+Basic example to display google satellite images:
+
+```
+<Leaflet options={{ tileByName: 'Google' }} />
+```
 
 
 ### <a name="tileByName"></a> tileByName
