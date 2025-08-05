@@ -180,6 +180,33 @@ Full example can be found at:
 
 ___________________________________
 
+## \<ImageOverlay>
+
+Components to load and display a single image over specific bounds of the map.
+
+* imageUrl: URL of the image
+* bounds: geographical bounds it is tied to
+* options: optional [leaflet options](https://leafletjs.com/reference.html#imageoverlay-option)
+  of the ImageOverlay: opacity,...
+
+Example:
+
+```
+<ImageOverlay
+  imageUrl="https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+  bounds={[[40.712216, -74.22655], [40.773941, -74.12544]]}
+  options={{opacity:0.5}}
+/>
+```
+
+Full example can be found at
+[astro-dev#ImageOverlay](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#ImageOverlay)
+
+
+<br>
+
+___________________________________
+
 ## \<CreateLeafletIcon>
 
 Create a custom icon to be displayed in markers.

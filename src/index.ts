@@ -7,6 +7,7 @@ import type {
   DivIconOptions,
   Map,
   MapOptions,
+  ImageOverlayOptions,
   TileLayerOptions,
   ZoomPanOptions,
   PolylineOptions,
@@ -85,6 +86,15 @@ export interface AstroLeafletPolylineType {
   options?: PolylineOptions,
 }
 
+/** arguments provided in ```<ImageOverlay .../>```. */
+export interface AstroLeafletImageOverlayType {
+  /** URL of the image */
+  imageUrl: string,
+  /** geographical bounds it is tied to */
+  bounds: [ LatLngExpression, LatLngExpression ],
+  /** leaflet options of the ImageOverlay: opacity,... */
+  options?: ImageOverlayOptions,
+}
 
 interface _AstroLeafletTileLayerOptionsType {
   /** leaflet options of the tilelayer: opacity,... */
@@ -154,6 +164,7 @@ export function getMapFromElement(el: HTMLElement): Map | undefined {
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
+export { default as ImageOverlay } from './components/ImageOverlay.astro'
 export { default as Polyline } from './components/Polyline.astro'
 export { default as FitBounds } from './components/FitBounds.astro'
 export { default as TileLayer } from './components/TileLayer.astro'

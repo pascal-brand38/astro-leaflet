@@ -181,6 +181,9 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
   import { CustomElementTileLayer } from './customElements/tilelayer'
   customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
 
+  import { CustomElementImageOverlay } from './customElements/imageoverlay'
+  customElements.get('astro-leaflet-imageoverlay') || customElements.define("astro-leaflet-imageoverlay", CustomElementImageOverlay);
+
   // ***                               MANDATORY                           ***
   // *** fitbounds must be declared AFTER the leaflet components           ***
   // *** this ensures the components are created before getting fitbounds  ***
