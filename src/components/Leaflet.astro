@@ -74,23 +74,17 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
     marker as Lmarker,
     tileLayer as LtileLayer,
     icon as Licon,
-    polyline as Lpolyline,
   } from "leaflet/dist/leaflet-src.esm"
   // } from "leaflet"
-  import { getMapFromElement } from '../index'
   import type {
     AstroLeafletOptionsType,
     AstroLeafletMarkerType,
     AstroLeafletCreateIconType,
-    AstroLeafletPolylineType,
-    AstroLeafletTileLayerType,
   } from '../index'
   import type {
     Icon,
     DivIcon,
     Map,
-    Polyline,
-    TileLayer,
   } from 'leaflet'
 
   // fix leaflet bug: default icon not displayed in production
@@ -181,59 +175,16 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
   }
   customElements.get('astro-leaflet') || customElements.define("astro-leaflet", CustomElementAstroLeaflet);
 
-  class CustomElementLeafletGeneric extends HTMLElement {
-    leafletElement: any | undefined
-  }
-
-  class CustomElementPolyline extends HTMLElement {
-    leafletElement: Polyline | undefined
-
-    constructor() {
-      super()
-      const props: AstroLeafletPolylineType = JSON.parse(this.dataset.props!)
-      const map = getMapFromElement(this)
-      if (map) {
-        this.leafletElement = Lpolyline(props.latlngs, props.options).addTo(map!);
-      }
-    }
-  }
+  import { CustomElementPolyline } from './customElements/polyline'
   customElements.get('astro-leaflet-polyline') || customElements.define("astro-leaflet-polyline", CustomElementPolyline);
 
-
-  class CustomElementTileLayer extends HTMLElement {
-    leafletElement: TileLayer | undefined
-
-    constructor() {
-      super()
-      const props: AstroLeafletTileLayerType = JSON.parse(this.dataset.props!)
-      const map = getMapFromElement(this)
-      if (map) {
-        this.leafletElement = LtileLayer(props.urlTemplate, props.options).addTo(map!);
-      }
-    }
-  }
+  import { CustomElementTileLayer } from './customElements/tilelayer'
   customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
 
-
-  class CustomElementFitBounds extends HTMLElement {
-    leafletElement: Polyline | undefined
-
-    constructor() {
-      super()
-      const map = getMapFromElement(this)
-      if (map) {
-        // take the parent. cast to a polyline, even if not, just to check access to leafletElement
-        const parent = this.parentElement as CustomElementLeafletGeneric | undefined
-        if (parent && parent.leafletElement && parent.leafletElement.getBounds) {
-          map.fitBounds(parent.leafletElement.getBounds())
-        } else {
-          console.error('astro-leaflet <FitBounds/>: no getbounds in parent')
-        }
-      } else {
-        console.error('astro-leaflet <FitBounds/>: no map in parent')
-      }
-    }
-  }
+  // ***                               MANDATORY                           ***
+  // *** fitbounds must be declared AFTER the leaflet components           ***
+  // *** this ensures the components are created before getting fitbounds  ***
+  import { CustomElementFitBounds } from './customElements/fitbounds'
   customElements.get('astro-leaflet-fitbounds') || customElements.define("astro-leaflet-fitbounds", CustomElementFitBounds);
 
 </script>
