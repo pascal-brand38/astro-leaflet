@@ -3,6 +3,59 @@
 
 import type { TileLayerOptions } from "leaflet"
 
+type _layerAllNamesType = {
+  [ key: string ]: {
+    desc?: string,
+    names: {
+      name: LayerNamesType,
+      desc?: string,
+    } []
+  }
+}
+
+/** list of all friendly name for layer, sorted by their providers */
+export const layerAllNames: _layerAllNamesType = {
+  'OSM': {
+    names: [
+      {
+        name: 'OSM',
+      },
+    ],
+  },
+  'Google': {
+    desc: 'Tiles provided by Google. Parameters are\ntype\nand\nlang',
+    names: [
+      {
+        name: 'Google&type=satellite',
+        desc: 'Satellite images from Google',
+      },
+      {
+        name: 'Google&type=street',
+      },
+      {
+        name: 'Google&type=hybrid',
+      },
+      {
+        name: 'Google&type=terrain',
+      },
+      {
+        name: 'Google&type=street&lang=it',
+        desc: 'Streets and labels from Google, in Italian language',
+      },
+    ],
+  },
+  'Michelin': {
+    names: [
+      {
+        name: 'Michelin&type=map',
+      },
+      {
+        name: 'Michelin&type=label',
+      }
+    ],
+  },
+}
+
 /** type guessed by a layer name of type ```LayerNamesType```,
  * such as ```Google&type=street&lang=en```
  */
@@ -16,7 +69,7 @@ export interface LayerFromNameType {
 type _char = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' |
              'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
 
-type _googleTypeType = '' | `&type=${'satellite' | 'street' | 'hybrid' | 'terrain '}`
+type _googleTypeType = '' | `&type=${'satellite' | 'street' | 'hybrid' | 'terrain'}`
 type _googleLangType = '' | `&lang=${_char}${_char}`
 type _michelinTypeType = '' | `&type=${'map' | 'label'}`
 
