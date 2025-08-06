@@ -15,45 +15,62 @@ type _layerAllNamesType = {
 
 /** list of all friendly name for layer, sorted by their providers */
 export const layerAllNames: _layerAllNamesType = {
-  'OSM': {
+  "OSM": {
     names: [
       {
-        name: 'OSM',
+        name: "OSM",
       },
     ],
   },
-  'Google': {
-    desc: 'Tiles provided by Google. Parameters are\ntype\nand\nlang',
+  "Google": {
+    desc: `Images provided by <a href='https://maps.google.com'>Google</a>. Parameters are type, extra and lang:<br>
+          <ul>
+            <li> &type= satellite or street or hybrid or terrain
+            <li> &extra= transit, bike, or several values separated by a comma
+            <li> &lang= 2 letter country code to provide labels in a spcific language
+          </ul>`
+    ,
     names: [
       {
-        name: 'Google&type=satellite',
-        desc: 'Satellite images from Google',
+        name: "Google&type=satellite",
+        desc: "Satellite images",
       },
       {
-        name: 'Google&type=street',
+        name: "Google&type=hybrid",
+        desc: "Satellite images with labels",
       },
       {
-        name: 'Google&type=hybrid',
+        name: "Google&type=street",
+        desc: "Street and road, with flat map",
       },
       {
-        name: 'Google&type=terrain',
+        name: "Google&type=terrain",
+        desc: "Street and road, with terrain map",
       },
       {
-        name: 'Google&type=street&lang=it',
-        desc: 'Streets and labels from Google, in Italian language',
+        name: "Google&type=street&extra=transit,bike&lang=ko",
+        desc: "Streets and labels, along with subways and bike lanes, in Korean language",
       },
     ],
   },
-  'Michelin': {
+  "Michelin": {
     names: [
       {
-        name: 'Michelin&type=map',
+        name: "Michelin&type=map",
       },
       {
-        name: 'Michelin&type=label',
+        name: "Michelin&type=label",
       }
     ],
   },
+  "Test": {
+    desc: "FOR TESTING ONLY - NOT TO BE USED",
+    names: [
+      {
+        name: "Test"
+      }
+    ]
+  }
 }
 
 /** type guessed by a layer name of type ```LayerNamesType```,
@@ -71,6 +88,8 @@ type _char = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | '
 
 type _googleTypeType = '' | `&type=${'satellite' | 'street' | 'hybrid' | 'terrain'}`
 type _googleLangType = '' | `&lang=${_char}${_char}`
+type _googleExtraValueType = 'transit' | 'bike'
+type _googleExtraType = '' | `&extra=${_googleExtraValueType}` | `&extra=${_googleExtraValueType},${_googleExtraValueType}`
 type _michelinTypeType = '' | `&type=${'map' | 'label'}`
 
 /** tilelayer name type */
@@ -78,9 +97,11 @@ export type LayerNamesType =
   /** openstreetmap */
   'OSM' |
   /** google map */
-  `Google${_googleTypeType}${_googleLangType}` |
+  `Google${_googleTypeType}${_googleExtraType}${_googleLangType}` |
   /** michelin */
-  `Michelin${_michelinTypeType}`
+  `Michelin${_michelinTypeType}` |
+  /** test */
+  `Test`
 
 /** return url tile layer and tile layer options related to a layer name,
  * such as ```Google&type=street&lang=en```
@@ -108,6 +129,7 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
   if (name.startsWith('Google')) {
     const corresp = { 'satellite': 's', 'street': 'm', 'terrain': 'p', 'hybrid': 's,h' }
     let lyrs = '&lyrs=s'    // default is satellite view
+    let extra = ''
     let lang = ''           // default does not define any language
 
     if (searchParams.has('type')) {
@@ -119,12 +141,15 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
     if (searchParams.has('lang')) {
       lang = '&hl=' + searchParams.get('lang')
     }
+    if (searchParams.has('extra')) {
+      lyrs += ',' + searchParams.get('extra')
+    }
 
     return {
       tileLayer: `https://{s}.google.com/vt/x={x}&y={y}&z={z}${lyrs}${lang}`,
       options: {
         subdomains: [ 'mt0', 'mt1', 'mt2', 'mt3' ],
-        attribution: 'Map data &copy; Google',
+        attribution: '&copy; Google',
       },
     }
   }
@@ -144,6 +169,17 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
         attribution: '&copy; Michelin',
         minZoom: 5,
         maxZoom: 19,
+      },
+    }
+  }
+
+  if (name.startsWith('Test')) {
+    return {
+      // tileLayer: `https://{s}.google.com/vt/x={x}&y={y}&z={z}&lyrs=m,traffic`,
+      tileLayer: `https://{s}.google.com/vt/x={x}&y={y}&z={z}&lyrs=m,transit,bike`,
+      options: {
+        subdomains: [ 'mt0', 'mt1', 'mt2', 'mt3' ],
+        attribution: '&copy; Google',
       },
     }
   }
