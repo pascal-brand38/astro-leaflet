@@ -24,7 +24,7 @@
 <br>
 <br>
 
-
+___________________________________
 
 # Installation
 Get the latest version from NPM:
@@ -34,13 +34,24 @@ $ npm install astro-leaflet
 
 <br>
 
-# License
-Astro-leaflet is released under the MIT license.
+___________________________________
 
-Astro-leaflet is using [leaflet](https://github.com/Leaflet/Leaflet).
-leaflet is a BSD-2-Clause license software
+# Want to help?
+
+Please [open an issue](https://github.com/pascal-brand38/astro-leaflet/issues)
+to ask for:
+* bug fix
+* add a new feature, part of leaflet,
+  but not implemented in astro-leaflet yet
+* having your favorite tile url be part of a
+  [friendly name](#tileByName).
+  This helps everyone quickly chosing the right map.
+
+Contributions and [Pull Request](https://github.com/pascal-brand38/astro-leaflet/pulls) are welcome.
 
 <br>
+
+___________________________________
 
 # Usage
 
@@ -52,6 +63,11 @@ import { Leaflet } from "astro-leaflet";
 ---
 <Leaflet />
 ```
+
+<br>
+
+___________________________________
+
 
 # Components:
 
@@ -102,7 +118,7 @@ the associated options, such as subdomains,...
 
 Please check
 [astro-dev](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#SelectLayer)
-to list and see current friendly names.
+to list friendly names, and preview the result in Leaflet.
 
 Here is a non-exhaustive list:
 * ```OSM```
@@ -111,7 +127,8 @@ Here is a non-exhaustive list:
   * ```Google&type=street```
   * ```Google&type=hybrid```
   * ```Google&type=terrain```
-  * The lanugage can also be provided adding ```&lang=xx```,
+  * ```Google&type=hybrid&extra=transit,bike```
+  * The language can also be provided adding ```&lang=xx```,
   such as for example ```Google&type=street&lang=en```
 * Michelin: default is map
   * ```Michelin&map```
@@ -243,8 +260,20 @@ Full example can be found at:
 
 ___________________________________
 
-## Complex Examples
+# Complex Examples
 
 Please check the [online doc](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet) for a fullset of examples.
 
 Full code is provided.
+
+<br>
+
+___________________________________
+
+# License
+Astro-leaflet is released under the MIT license.
+
+Astro-leaflet is using [leaflet](https://github.com/Leaflet/Leaflet).
+leaflet is a BSD-2-Clause license software
+
+<br>
