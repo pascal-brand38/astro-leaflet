@@ -16,6 +16,8 @@ type _layerAllNamesType = {
 /** list of all friendly name for layer, sorted by their providers */
 export const layerAllNames: _layerAllNamesType = {
   "OSM": {
+    desc: `Images provided by <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>.`
+    ,
     names: [
       {
         name: "OSM",
@@ -54,6 +56,11 @@ export const layerAllNames: _layerAllNamesType = {
     ],
   },
   "Michelin": {
+    desc: `Images provided by <a href='https://www.viamichelin.com/'>Michelin</a>. Parameters are type:<br>
+          <ul>
+            <li> &type= map or label
+          </ul>`
+    ,
     names: [
       {
         name: "Michelin&type=map",
@@ -63,14 +70,6 @@ export const layerAllNames: _layerAllNamesType = {
       }
     ],
   },
-  "Test": {
-    desc: "FOR TESTING ONLY - NOT TO BE USED",
-    names: [
-      {
-        name: "Test"
-      }
-    ]
-  }
 }
 
 /** type guessed by a layer name of type ```LayerNamesType```,
@@ -99,9 +98,7 @@ export type LayerNamesType =
   /** google map */
   `Google${_googleTypeType}${_googleExtraType}${_googleLangType}` |
   /** michelin */
-  `Michelin${_michelinTypeType}` |
-  /** test */
-  `Test`
+  `Michelin${_michelinTypeType}`
 
 /** return url tile layer and tile layer options related to a layer name,
  * such as ```Google&type=street&lang=en```
@@ -157,9 +154,9 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
 
   if (name.startsWith('Michelin')) {
     // from https://xyz.michelstuyts.be/service.php?id=620&lang=fr
-    let tileLayer = 'https://map1.viamichelin.com/map/mapdirect?map=viamichelin&z={z}&x={x}&y={y}&format=png&version=202301111200&layer=background&protocol=https'
+    let tileLayer = 'https://map1.viamichelin.com/map/mapdirect?map=viamichelin&z={z}&x={x}&y={y}&format=png&version=202505301130&layer=background&protocol=https'
     if (searchParams.has('type') && (searchParams.get('type')==='label')) {
-			tileLayer = 'https://{s}.viamichelin.com/map/mapdirect?map=hybrid&z={z}&x={x}&y={y}&format=png&version=201503191157&layer=network'
+			tileLayer = 'https://{s}.viamichelin.com/map/mapdirect?map=hybrid&z={z}&x={x}&y={y}&format=png&version=202505301130&layer=network'
     }
     return {
       tileLayer,
@@ -169,17 +166,6 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
         attribution: '&copy; Michelin',
         minZoom: 5,
         maxZoom: 19,
-      },
-    }
-  }
-
-  if (name.startsWith('Test')) {
-    return {
-      // tileLayer: `https://{s}.google.com/vt/x={x}&y={y}&z={z}&lyrs=m,traffic`,
-      tileLayer: `https://{s}.google.com/vt/x={x}&y={y}&z={z}&lyrs=m,transit,bike`,
-      options: {
-        subdomains: [ 'mt0', 'mt1', 'mt2', 'mt3' ],
-        attribution: '&copy; Google',
       },
     }
   }
