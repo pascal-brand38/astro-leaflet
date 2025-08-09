@@ -88,16 +88,16 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
 
 
   class CustomElementAstroLeaflet extends HTMLElement {
-    /** The map, once created. Can be accessed using    getMap(id),
-     * which is summarized by                           document.getElementById(id).map
+    /** The map, once created. Can be accessed using    getMapFromId(id),
+     * which is summarized by                           document.getElementById(id).leafletElement
      */
-    map: Map | undefined    // saved map
+    leafletElement: Map | undefined
 
     constructor() {
       super()
       const options: AstroLeafletOptionsType = JSON.parse(this.dataset.options!)
       const id: string = this.dataset.id!
-      this.map = undefined
+      this.leafletElement = undefined
 
       this.createMap(id, options)
 
@@ -121,7 +121,7 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
 
       // save the map
       console.info('astro-leaflet: map is created')
-      this.map = map
+      this.leafletElement = map
     }
   }
   customElements.get('astro-leaflet') || customElements.define("astro-leaflet", CustomElementAstroLeaflet);

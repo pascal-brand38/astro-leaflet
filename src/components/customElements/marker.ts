@@ -37,20 +37,22 @@ export class CustomElementMarker extends HTMLElement {
   constructor() {
     super()
     const props: AstroLeafletMarkerType = JSON.parse(this.dataset.props!)
-    const map = getMapFromElement(this)
-    if (map) {
-      // add the icon marker, if not the default one
-      if (!props.options) {
-        props.options = {}
-      }
-      props.options.icon = _astroLeafletMarkerDefaultIcon
-      if (props.astroIconName) {
-        if (_astroLeafletIcons[props.astroIconName]) {
-          props.options.icon = _astroLeafletIcons[props.astroIconName]
-        }
-      }
 
-      this.leafletElement = Lmarker(props.latlng, props.options).addTo(map!);
+    // add the icon marker, if not the default one
+    if (!props.options) {
+      props.options = {}
+    }
+    props.options.icon = _astroLeafletMarkerDefaultIcon
+    if (props.astroIconName) {
+      if (_astroLeafletIcons[props.astroIconName]) {
+        props.options.icon = _astroLeafletIcons[props.astroIconName]
+      }
+    }
+    this.leafletElement = Lmarker(props.latlng, props.options)
+
+    const mapOrLayerGroup = getMapFromElement(this)
+    if (mapOrLayerGroup) {
+      this.leafletElement!.addTo(mapOrLayerGroup);
     }
   }
 }

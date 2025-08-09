@@ -5,9 +5,9 @@ import type {
   LatLngExpression,
   MarkerOptions,
   DivIconOptions,
-  Map,
-  MapOptions,
+  Map, MapOptions,
   ImageOverlayOptions,
+  LayerGroup, LayerGroupOptions,
   TileLayerOptions,
   ZoomPanOptions,
   PolylineOptions,
@@ -15,6 +15,7 @@ import type {
 import type { HTMLAttributes } from 'astro/types'
 
 import type { LayerNamesType } from './layerFromName'
+import { CustomElementLeafletGeneric } from './components/customElements/generic'
 
 /** Type to create an icon to be used in leaflet markers.
  * This type is used in ```<CreateLeafletIcon .../>```
@@ -121,12 +122,6 @@ interface _AstroLeafletTileLayerByUrlType extends _AstroLeafletTileLayerOptionsT
 export type AstroLeafletTileLayerType = _AstroLeafletTileLayerByNameType | _AstroLeafletTileLayerByUrlType
 
 
-/** custom element internal declaration of the custom element created by ```<Leaflet ...>```. */
-declare class _CustomElementAstroLeaflet extends HTMLElement {
-  /** leaflet map. undefined till the html is loaded */
-  map: Map | undefined
-}
-
 /** get leaflet map associated with an id.
  *  Available once the document is loaded */
 export function getMapFromId(id: string): Map | undefined {
@@ -135,11 +130,11 @@ export function getMapFromId(id: string): Map | undefined {
     console.error(`astro-leaflet::getMap: id ${id} does not exist`)
     return undefined
   } else {
-    const customElementLeafletMap: _CustomElementAstroLeaflet = (el.parentElement as _CustomElementAstroLeaflet)
-    if (!customElementLeafletMap.map) {
+    const customElementLeafletMap: CustomElementLeafletGeneric = (el.parentElement as CustomElementLeafletGeneric)
+    if (!customElementLeafletMap.leafletElement) {
       console.error(`astro-leaflet::getMap: id ${id} does not have a leaflet map associated with`)
     }
-    return customElementLeafletMap.map
+    return customElementLeafletMap.leafletElement
   }
 }
 
@@ -148,18 +143,19 @@ export function getMapFromElement(el: HTMLElement): Map | undefined {
   let parent: HTMLElement | null = el
   while (parent) {
     if (parent.tagName === 'ASTRO-LEAFLET') {
-      const customElementLeafletMap: _CustomElementAstroLeaflet = (parent as _CustomElementAstroLeaflet)
-      if (!customElementLeafletMap.map) {
+      const customElementLeafletMap: CustomElementLeafletGeneric = (parent as CustomElementLeafletGeneric)
+      if (!customElementLeafletMap.leafletElement) {
         console.error(`astro-leaflet::getMapFromElement(): no leaflet map associated with`)
         return undefined
       }
-      return customElementLeafletMap.map
+      return customElementLeafletMap.leafletElement
     }
     parent = parent.parentElement
   }
   console.error('astro-leaflet::getMapFromElement() failed - cannot find ASTRO-LEAFLET custom element')
   return undefined
 }
+
 
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
