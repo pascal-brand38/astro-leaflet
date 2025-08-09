@@ -164,7 +164,10 @@ export function getMapFromElement(el: HTMLElement): Map | undefined {
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
+
 export { default as ImageOverlay } from './components/ImageOverlay.astro'
+export { default as Marker } from './components/Marker.astro'
 export { default as Polyline } from './components/Polyline.astro'
+
 export { default as FitBounds } from './components/FitBounds.astro'
 export { default as TileLayer } from './components/TileLayer.astro'

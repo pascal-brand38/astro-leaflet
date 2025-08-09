@@ -1,0 +1,17 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+//
+// Used to display clickable/draggable icons on the map.
+// https://leafletjs.com/reference.html#marker
+import type { AstroLeafletMarkerType } from '../index'
+
+type Props = AstroLeafletMarkerType
+
+---
+
+<!-- dummy component to call the constructor of the custom element astro-leaflet-marker,
+     which is defined in Leaflet.astro -->
+<astro-leaflet-marker data-props={JSON.stringify(Astro.props)} >
+  <slot />
+</astro-leaflet-marker>

@@ -14,6 +14,7 @@
 //    	}
 //    }}/>
 
+import Marker from './Marker.astro'
 import type { AstroLeafletType,  } from '../index'
 import { getLayerOptionsFromName, mergeTileLayerOptions } from '../layerFromName'
 import "leaflet/dist/leaflet.css"
@@ -64,54 +65,26 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
 >
   <div id={id} style={style} class={className} {...props}>
   </div>
+  {
+    options.markers && options.markers.map(marker => (
+      <Marker latlng={marker.latlng} options={marker.options} astroIconName={marker.astroIconName} />
+    ))
+  }
   <slot/>
 </astro-leaflet>
 
 <script>
   import {
-    divIcon as LdivIcon,
     map as Lmap,
-    marker as Lmarker,
     tileLayer as LtileLayer,
-    icon as Licon,
   } from "leaflet/dist/leaflet-src.esm"
   // } from "leaflet"
   import type {
     AstroLeafletOptionsType,
-    AstroLeafletMarkerType,
-    AstroLeafletCreateIconType,
   } from '../index'
   import type {
-    Icon,
-    DivIcon,
     Map,
   } from 'leaflet'
-
-  // fix leaflet bug: default icon not displayed in production
-  // https://stackoverflow.com/questions/41144319/leaflet-marker-not-found-production-env/76454369#76454369
-  const _markerDefaultIcon = Licon({
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [2, -40],
-    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.0/dist/images/marker-icon-2x.png',
-    iconUrl: 'https://unpkg.com/leaflet@1.9.0/dist/images/marker-shadow.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.9.0/dist/images/marker-shadow.png',
-  })
-
-  // custom icons, by their name
-  const astroLeafletIcons: { [name: string]: Icon | DivIcon } = {}
-
-  // ***                               MANDATORY                                          ***
-  // *** CustomElementCreateLeafletIcon must be declared before CustomElementAstroLeaflet ***
-  // *** this ensures icons are created before the map, and so can be displayed           ***
-  class CustomElementCreateLeafletIcon extends HTMLElement {
-    constructor() {
-      super()
-      const props: AstroLeafletCreateIconType = JSON.parse(this.dataset.props!)
-      astroLeafletIcons[props.name] = LdivIcon(props.options);
-    }
-  }
-  customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CustomElementCreateLeafletIcon);
 
 
   class CustomElementAstroLeaflet extends HTMLElement {
@@ -146,28 +119,6 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
       map.setView(options.center!, options.zoom, options.setViewOptions)
       LtileLayer(options.tileLayer!, options.tileLayerOptions).addTo(map)
 
-      // add markers
-      if (options && options.markers) {
-        // window.onload = function() {
-          // create the marker on onload event, to ensure the default icon is loaded
-          // this is because of the fix
-          options.markers.forEach((marker:AstroLeafletMarkerType) => {
-            // add the icon marker, if not the default one
-            if (!marker.options) {
-              marker.options = {}
-            }
-            marker.options.icon = _markerDefaultIcon
-            if (marker.astroIconName) {
-              if (astroLeafletIcons[marker.astroIconName]) {
-                marker.options.icon = astroLeafletIcons[marker.astroIconName]
-              }
-            }
-
-            Lmarker(marker.latlng, marker.options).addTo(map)
-          })
-        // }
-      }
-
       // save the map
       console.info('astro-leaflet: map is created')
       this.map = map
@@ -180,6 +131,10 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
 
   import { CustomElementTileLayer } from './customElements/tilelayer'
   customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
+
+  import { CustomElementCreateLeafletIcon, CustomElementMarker } from './customElements/marker'
+  customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CustomElementCreateLeafletIcon);
+  customElements.get('astro-leaflet-marker') || customElements.define("astro-leaflet-marker", CustomElementMarker);
 
   import { CustomElementImageOverlay } from './customElements/imageoverlay'
   customElements.get('astro-leaflet-imageoverlay') || customElements.define("astro-leaflet-imageoverlay", CustomElementImageOverlay);
