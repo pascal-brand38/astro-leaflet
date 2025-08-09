@@ -67,7 +67,7 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
   </div>
   {
     options.markers && options.markers.map(marker => (
-      <Marker latlng={marker.latlng} options={marker.options} astroIconName={marker.astroIconName} />
+      <Marker {...marker} />
     ))
   }
   <slot/>
