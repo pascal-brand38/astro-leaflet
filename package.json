@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/pascal-brand38/astro-leaflet/issues"
   },
-  "homepage": "https://github.com/pascal-brand38/astro-leaflet",
+  "homepage": "https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/",
   "exports": {
     ".": "./index.ts"
   },
