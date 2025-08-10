@@ -182,6 +182,9 @@ export function getMapOrLayoutGroupFromElement(el: HTMLElement | null): Map | La
 export function getLayerGroupFromElement(el: HTMLElement | null): LayerGroup | undefined {
   return _getXXXFromElement([ 'ASTRO-LEAFLET-LAYERGROUP' ], el)
 }
+export function getLayerGroupOrTileLayerFromElement(el: HTMLElement | null): LayerGroup | undefined {
+  return _getXXXFromElement([ 'ASTRO-LEAFLET-LAYERGROUP', 'ASTRO-LEAFLET-TILELAYER' ], el)
+}
 export function getControlLayerFromElement(el: HTMLElement | null): Control.Layers | undefined {
   return _getXXXFromElement([ 'ASTRO-LEAFLET-CONTROLLAYER' ], el)
 }

@@ -128,6 +128,8 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
 
   import { CustomElementLayerGroup } from './customElements/layergroup'
   customElements.get('astro-leaflet-layergroup') || customElements.define("astro-leaflet-layergroup", CustomElementLayerGroup);
+  import { CustomElementTileLayer } from './customElements/tilelayer'
+  customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
 
   import { CustomElementControlLayer, CustomElementBaseLayer, CustomElementOverlay } from './customElements/controllayer'
   customElements.get('astro-leaflet-controllayer') || customElements.define("astro-leaflet-controllayer", CustomElementControlLayer);
@@ -136,9 +138,6 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
 
   import { CustomElementPolyline } from './customElements/polyline'
   customElements.get('astro-leaflet-polyline') || customElements.define("astro-leaflet-polyline", CustomElementPolyline);
-
-  import { CustomElementTileLayer } from './customElements/tilelayer'
-  customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
 
   import { CustomElementCreateLeafletIcon, CustomElementMarker } from './customElements/marker'
   customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CustomElementCreateLeafletIcon);

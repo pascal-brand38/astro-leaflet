@@ -2,7 +2,7 @@
 // MIT License
 
 import { control as Lcontrol } from "leaflet/dist/leaflet-src.esm"
-import { getMapFromElement, getMapOrLayoutGroupFromElement, getControlLayerFromElement, getLayerGroupFromElement } from '../../index'
+import { getMapFromElement, getControlLayerFromElement, getLayerGroupOrTileLayerFromElement } from '../../index'
 import type { Control } from 'leaflet'
 import type { AstroLeafletBaseLayerType, AstroLeafletOverlayType } from 'astro-leaflet'
 
@@ -28,9 +28,11 @@ export class CustomElementBaseLayer extends HTMLElement {
     const props: AstroLeafletBaseLayerType = JSON.parse(this.dataset.props!)
 
     const controllayer = getControlLayerFromElement(this)
-    const layergroup = getLayerGroupFromElement(this)
-    if (controllayer && layergroup) {
-      controllayer.addBaseLayer(layergroup, props.name)
+    const layer = getLayerGroupOrTileLayerFromElement(this)
+    console.log('controllayer= ', controllayer)
+    console.log('layer= ', layer)
+    if (controllayer && layer) {
+      controllayer.addBaseLayer(layer, props.name)
     }
   }
 }
@@ -43,11 +45,9 @@ export class CustomElementOverlay extends HTMLElement {
 
     console.log('CustomElementOverlay')
     const controllayer = getControlLayerFromElement(this)
-    const layergroup = getLayerGroupFromElement(this)
-    if (controllayer && layergroup) {
-      console.log('controllayer= ', controllayer)
-      console.log('layergroup= ', layergroup)
-      controllayer.addOverlay(layergroup, props.name)
+    const layer = getLayerGroupOrTileLayerFromElement(this)
+    if (controllayer && layer) {
+      controllayer.addOverlay(layer, props.name)
     }
   }
 }
