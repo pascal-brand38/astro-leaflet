@@ -171,6 +171,7 @@ export function getMapOrLayoutGroupFromElement(el: HTMLElement | null): Map | La
 
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
+export { default as LayerControl } from './components/LayerControl.astro'
 export { default as LayerGroup } from './components/LayerGroup.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
 
