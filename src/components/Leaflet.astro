@@ -126,8 +126,8 @@ const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (p
   }
   customElements.get('astro-leaflet') || customElements.define("astro-leaflet", CustomElementAstroLeaflet);
 
-  import { CustomElementLayerControl } from './customElements/layercontrol'
-  customElements.get('astro-leaflet-layercontrol') || customElements.define("astro-leaflet-layercontrol", CustomElementLayerControl);
+  import { CustomElementControlLayer } from './customElements/controllayer'
+  customElements.get('astro-leaflet-controllayer') || customElements.define("astro-leaflet-controllayer", CustomElementControlLayer);
 
   import { CustomElementLayerGroup } from './customElements/layergroup'
   customElements.get('astro-leaflet-layergroup') || customElements.define("astro-leaflet-layergroup", CustomElementLayerGroup);

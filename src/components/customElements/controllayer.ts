@@ -5,7 +5,7 @@ import { control as Lcontrol } from "leaflet/dist/leaflet-src.esm"
 import { getMapFromElement } from '../../index'
 import type { Control } from 'leaflet'
 
-export class CustomElementLayerControl extends HTMLElement {
+export class CustomElementControlLayer extends HTMLElement {
   leafletElement: Control.Layers | undefined
 
   constructor() {
