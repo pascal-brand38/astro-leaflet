@@ -7,7 +7,8 @@ import type {
   DivIconOptions,
   Map, MapOptions,
   ImageOverlayOptions,
-  LayerGroup, LayerGroupOptions,
+  LayerGroup,
+  LayerOptions,
   TileLayerOptions,
   ZoomPanOptions,
   PolylineOptions,
@@ -121,44 +122,56 @@ interface _AstroLeafletTileLayerByUrlType extends _AstroLeafletTileLayerOptionsT
 /** arguments provided in ```<TileLayer .../>```. */
 export type AstroLeafletTileLayerType = _AstroLeafletTileLayerByNameType | _AstroLeafletTileLayerByUrlType
 
-
-/** get leaflet map associated with an id.
- *  Available once the document is loaded */
-export function getMapFromId(id: string): Map | undefined {
-  let el = document.getElementById(id)
-  if (!el || !el.parentElement) {
-    console.error(`astro-leaflet::getMap: id ${id} does not exist`)
-    return undefined
-  } else {
-    const customElementLeafletMap: CustomElementLeafletGeneric = (el.parentElement as CustomElementLeafletGeneric)
-    if (!customElementLeafletMap.leafletElement) {
-      console.error(`astro-leaflet::getMap: id ${id} does not have a leaflet map associated with`)
-    }
-    return customElementLeafletMap.leafletElement
-  }
+/** arguments provided in ```<LayerGroup .../>```. */
+export interface AstroLeafletLayerGroupType {
+  /** id to get the layergroup */
+  id?: string,
+  /** leaflet options of the layer group: attribution,... */
+  options?: LayerOptions,
 }
 
-/** get leaflet map, whose element is inside this <astro-leaflet> */
-export function getMapFromElement(el: HTMLElement): Map | undefined {
+/** get leaflet map, whose element is inside this <xxx> (such as <astro-leaflet>, <astro-leaflet-layergroup>...) */
+function _getXXXFromElement(xxx: string[], el: HTMLElement | null): any | undefined {
+  if (!el) {
+    console.error('astro-leaflet::getxxxFromElement(${xxx}) failed - element is null')
+    return undefined
+  }
   let parent: HTMLElement | null = el
   while (parent) {
-    if (parent.tagName === 'ASTRO-LEAFLET') {
+    if (xxx.includes(parent.tagName)) {
       const customElementLeafletMap: CustomElementLeafletGeneric = (parent as CustomElementLeafletGeneric)
       if (!customElementLeafletMap.leafletElement) {
-        console.error(`astro-leaflet::getMapFromElement(): no leaflet map associated with`)
+        console.error(`astro-leaflet::getxxxFromElement(${xxx}): no leaflet element associated with`)
         return undefined
       }
       return customElementLeafletMap.leafletElement
     }
     parent = parent.parentElement
   }
-  console.error('astro-leaflet::getMapFromElement() failed - cannot find ASTRO-LEAFLET custom element')
+  console.error('astro-leaflet::getxxxFromElement(${xxx}) failed - cannot find requested custom element')
   return undefined
 }
+
+export function getMapFromId(id: string): Map | undefined {
+  return getMapFromElement(document.getElementById(id))
+}
+
+export function getMapOrLayoutGroupFromId(id: string): Map | LayerGroup | undefined {
+  return getMapOrLayoutGroupFromElement(document.getElementById(id))
+}
+
+export function getMapFromElement(el: HTMLElement | null): Map | undefined {
+  return _getXXXFromElement([ 'ASTRO-LEAFLET' ], el)
+}
+export function getMapOrLayoutGroupFromElement(el: HTMLElement | null): Map | LayerGroup | undefined {
+  return _getXXXFromElement([ 'ASTRO-LEAFLET', 'ASTRO-LEAFLET-LAYERGROUP' ], el)
+}
+
 
 
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
+export { default as LayerGroup } from './components/LayerGroup.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
 
 export { default as ImageOverlay } from './components/ImageOverlay.astro'

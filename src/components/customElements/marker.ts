@@ -2,7 +2,7 @@
 // MIT License
 
 import { marker as Lmarker, icon as Licon, divIcon as LdivIcon } from "leaflet/dist/leaflet-src.esm"
-import { getMapFromElement } from '../../index'
+import { getMapOrLayoutGroupFromElement } from '../../index'
 import type { AstroLeafletCreateIconType, AstroLeafletMarkerType } from '../../index'
 import type { Marker, Icon, DivIcon } from 'leaflet'
 
@@ -50,7 +50,7 @@ export class CustomElementMarker extends HTMLElement {
     }
     this.leafletElement = Lmarker(props.latlng, props.options)
 
-    const mapOrLayerGroup = getMapFromElement(this)
+    const mapOrLayerGroup = getMapOrLayoutGroupFromElement(this)
     if (mapOrLayerGroup) {
       this.leafletElement!.addTo(mapOrLayerGroup);
     }
