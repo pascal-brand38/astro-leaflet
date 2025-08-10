@@ -2,6 +2,7 @@
 // MIT License
 
 import type {
+  Control,
   LatLngExpression,
   MarkerOptions,
   DivIconOptions,
@@ -130,6 +131,18 @@ export interface AstroLeafletLayerGroupType {
   options?: LayerOptions,
 }
 
+/** arguments provided in ```<AstroLeafletBaseLayerType .../>```. */
+export interface AstroLeafletBaseLayerType {
+  /** name of the base layer radio button */
+  name: string,
+}
+
+/** arguments provided in ```<AstroLeafletOverlayType .../>```. */
+export interface AstroLeafletOverlayType {
+  /** name of the overlay checkbox button */
+  name: string,
+}
+
 /** get leaflet map, whose element is inside this <xxx> (such as <astro-leaflet>, <astro-leaflet-layergroup>...) */
 function _getXXXFromElement(xxx: string[], el: HTMLElement | null): any | undefined {
   if (!el) {
@@ -166,13 +179,20 @@ export function getMapFromElement(el: HTMLElement | null): Map | undefined {
 export function getMapOrLayoutGroupFromElement(el: HTMLElement | null): Map | LayerGroup | undefined {
   return _getXXXFromElement([ 'ASTRO-LEAFLET', 'ASTRO-LEAFLET-LAYERGROUP' ], el)
 }
-
+export function getLayerGroupFromElement(el: HTMLElement | null): LayerGroup | undefined {
+  return _getXXXFromElement([ 'ASTRO-LEAFLET-LAYERGROUP' ], el)
+}
+export function getControlLayerFromElement(el: HTMLElement | null): Control.Layers | undefined {
+  return _getXXXFromElement([ 'ASTRO-LEAFLET-CONTROLLAYER' ], el)
+}
 
 
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
 export { default as ControlLayer } from './components/ControlLayer.astro'
 export { default as LayerGroup } from './components/LayerGroup.astro'
+export { default as BaseLayer } from './components/BaseLayer.astro'
+export { default as Overlay } from './components/Overlay.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
 
 export { default as ImageOverlay } from './components/ImageOverlay.astro'

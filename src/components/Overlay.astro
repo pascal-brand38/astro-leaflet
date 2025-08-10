@@ -1,0 +1,15 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+//
+import type { AstroLeafletOverlayType } from '../index'
+
+type Props = AstroLeafletOverlayType
+
+---
+
+<!-- dummy component to call the constructor of the custom element astro-leaflet-overlay,
+     which is defined in Leaflet.astro -->
+<astro-leaflet-overlay data-props={JSON.stringify(Astro.props)} >
+  <slot />
+</astro-leaflet-overlay>
