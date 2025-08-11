@@ -139,6 +139,10 @@ const style = (providedStyle!==undefined && className!==undefined) ? 'width: 100
   customElements.get('astro-leaflet-baselayer') || customElements.define("astro-leaflet-baselayer", CustomElementBaseLayer);
   customElements.get('astro-leaflet-overlay') || customElements.define("astro-leaflet-overlay", CustomElementOverlay);
 
+  import { CustomElementCircle } from './customElements/Circle'
+  customElements.get('astro-leaflet-circle') || customElements.define("astro-leaflet-circle", CustomElementCircle);
+  import { CustomElementPolygon } from './customElements/polygon'
+  customElements.get('astro-leaflet-polygon') || customElements.define("astro-leaflet-polygon", CustomElementPolygon);
   import { CustomElementPolyline } from './customElements/polyline'
   customElements.get('astro-leaflet-polyline') || customElements.define("astro-leaflet-polyline", CustomElementPolyline);
 

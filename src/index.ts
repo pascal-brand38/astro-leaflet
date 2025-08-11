@@ -2,6 +2,7 @@
 // MIT License
 
 import type {
+  CircleOptions,
   Control,
   LatLngExpression,
   MarkerOptions,
@@ -100,6 +101,22 @@ export interface AstroLeafletImageOverlayType {
   bounds: [ LatLngExpression, LatLngExpression ],
   /** leaflet options of the ImageOverlay: opacity,... */
   options?: ImageOverlayOptions,
+}
+
+/** arguments provided in ```<Circle .../>```. */
+export interface AstroLeafletCircleType {
+  /** geographical point */
+  latlng: LatLngExpression,
+  /** leaflet options of the Circle: radius,... */
+  options?: CircleOptions,
+}
+
+/** arguments provided in ```<Polygon .../>```. */
+export interface AstroLeafletPolygonType {
+  /** list of positions, to draw the polyline */
+  latlngs: LatLngExpression[] | LatLngExpression[][],
+  /** leaflet options of the polyline: color,... */
+  options?: PolylineOptions,
 }
 
 interface _AstroLeafletTileLayerOptionsType {
@@ -201,9 +218,11 @@ export { default as BaseLayer } from './components/BaseLayer.astro'
 export { default as Overlay } from './components/Overlay.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
 
+export { default as Circle } from './components/Circle.astro'
 export { default as ImageOverlay } from './components/ImageOverlay.astro'
 export { default as Marker } from './components/Marker.astro'
 export { default as Polyline } from './components/Polyline.astro'
+export { default as Polygon } from './components/Polygon.astro'
 
 export { default as FitBounds } from './components/FitBounds.astro'
 export { default as TileLayer } from './components/TileLayer.astro'

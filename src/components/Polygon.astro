@@ -1,0 +1,19 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+//
+// A class for drawing polygon overlays on a map.
+// Note that points you pass when creating a polygon shouldn't have an
+// additional last point equal to the first one — it's better to filter out such points.
+
+import type { AstroLeafletPolygonType } from '../index'
+
+type Props = AstroLeafletPolygonType
+
+---
+
+<!-- dummy component to call the constructor of the custom element astro-leaflet-polygon,
+     which is defined in Leaflet.astro -->
+<astro-leaflet-polygon data-props={JSON.stringify(Astro.props)} >
+  <slot />
+</astro-leaflet-polygon>
