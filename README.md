@@ -69,6 +69,24 @@ import { Leaflet } from "astro-leaflet";
 ___________________________________
 
 
+## Tutorials
+
+[astro-dev](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/)
+provides different ways of using ```astro-leaflet```
+
+[Leaflet tutorials](https://leafletjs.com/examples.html) is a great way to learn Leaflet.
+Here is a list of the leaflet tutorials implemented
+with ```astro-leaflet```.
+
+* [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl):
+  A tutorial on how to manage groups of layers and use the layer switching control.
+  It demontrates how to use ```astro-leaflet``` components
+  \<ControlLayer>, \<LayerGroup>, \<BaseLayer> and \<Overlay>
+
+<br>
+
+___________________________________
+
 # Components:
 
 ## \<LeafLet>
@@ -219,6 +237,23 @@ Example:
 Full example can be found at
 [astro-dev#ImageOverlay](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#ImageOverlay)
 
+
+<br>
+
+___________________________________
+
+## API
+
+For each astro-leaflet components, there is a link
+to the full demo and code:
+* \<ControlLayer>:
+  [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
+* \<LayerGroup>:
+  [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
+* \<BaseLayer>:
+  [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
+* \<Overlay>:
+  [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
 
 <br>
 

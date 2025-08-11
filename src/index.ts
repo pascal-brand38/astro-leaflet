@@ -78,6 +78,9 @@ export interface AstroLeafletOptionsType {
  * in order to give a size to the map to display
  */
 export interface AstroLeafletType extends HTMLAttributes<"div"> {
+  /** true if no default layer or other should be applied */
+  noDefault?: true | undefined,
+  /** options of leaflet: tileByNmae,... */
   options?: AstroLeafletOptionsType
 }
 
