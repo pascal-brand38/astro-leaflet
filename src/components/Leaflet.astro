@@ -57,7 +57,8 @@ const {
 } = enrichedProps
 
 // if neither style nor class is provided, set a style so that the map is displayed
-const style = (providedStyle!==undefined && className!==undefined) ? 'width: 100%; height: 50vh;' : (providedStyle || '')
+const style = (providedStyle===undefined && className===undefined) ? 'width: 100%; height: 50vh;' : (providedStyle || '')
+//const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (providedStyle || '')
 
 ---
 
@@ -158,5 +159,7 @@ const style = (providedStyle!==undefined && className!==undefined) ? 'width: 100
   // *** this ensures the components are created before getting fitbounds  ***
   import { CustomElementFitBounds } from './customElements/fitbounds'
   customElements.get('astro-leaflet-fitbounds') || customElements.define("astro-leaflet-fitbounds", CustomElementFitBounds);
+  import { CustomElementPopup } from './customElements/popup'
+  customElements.get('astro-leaflet-popup') || customElements.define("astro-leaflet-popup", CustomElementPopup);
 
 </script>

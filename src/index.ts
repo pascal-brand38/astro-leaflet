@@ -14,6 +14,7 @@ import type {
   TileLayerOptions,
   ZoomPanOptions,
   PolylineOptions,
+  PopupOptions,
 } from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
 
@@ -163,6 +164,21 @@ export interface AstroLeafletOverlayType {
   name: string,
 }
 
+/** arguments provided in ```<Popup .../>```. */
+export interface AstroLeafletPopupType {
+  /** name of the overlay checkbox button */
+  content: string,
+
+  /** geographical point */
+  latlng?: LatLngExpression,
+
+  /** leaflet options of a popup */
+  options?: PopupOptions,
+
+  /** true to open it on init */
+  open?: true | undefined
+}
+
 /** get leaflet map, whose element is inside this <xxx> (such as <astro-leaflet>, <astro-leaflet-layergroup>...) */
 function _getXXXFromElement(xxx: string[], el: HTMLElement | null): any | undefined {
   if (!el) {
@@ -224,5 +240,6 @@ export { default as Marker } from './components/Marker.astro'
 export { default as Polyline } from './components/Polyline.astro'
 export { default as Polygon } from './components/Polygon.astro'
 
+export { default as Popup } from './components/Popup.astro'
 export { default as FitBounds } from './components/FitBounds.astro'
 export { default as TileLayer } from './components/TileLayer.astro'
