@@ -29,8 +29,6 @@ export class CustomElementBaseLayer extends HTMLElement {
 
     const controllayer = getControlLayerFromElement(this)
     const layer = getLayerGroupOrTileLayerFromElement(this)
-    console.log('controllayer= ', controllayer)
-    console.log('layer= ', layer)
     if (controllayer && layer) {
       controllayer.addBaseLayer(layer, props.name)
     }
@@ -41,9 +39,8 @@ export class CustomElementOverlay extends HTMLElement {
   constructor() {
     super()
 
-    const props: AstroLeafletBaseLayerType = JSON.parse(this.dataset.props!)
+    const props: AstroLeafletOverlayType = JSON.parse(this.dataset.props!)
 
-    console.log('CustomElementOverlay')
     const controllayer = getControlLayerFromElement(this)
     const layer = getLayerGroupOrTileLayerFromElement(this)
     if (controllayer && layer) {
