@@ -64,6 +64,9 @@ import { Leaflet } from "astro-leaflet";
 <Leaflet />
 ```
 
+In case no map is displayed, or in case of any problem,
+please refer to the [Troubleshooting section](#Troubleshooting)
+
 <br>
 
 ___________________________________
@@ -246,16 +249,42 @@ ___________________________________
 
 For each astro-leaflet components, there is a link
 to the full demo and code:
-* \<ControlLayer>:
+* ```\<Circle>```:
+  [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart)
+* ```\<Marker>```:
+  [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart),
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
-* \<LayerGroup>:
+* ```\<Polygon>```:
+  [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart)
+
+<br>
+
+* ```\<ControlLayer>```:
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
-* \<BaseLayer>:
+* ```\<LayerGroup>```:
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
-* \<Overlay>:
+* ```\<BaseLayer>```:
+  [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
+* ```\<Overlay>```:
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
 
 <br>
+
+* ```\<Popup>```:
+  [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart),
+  [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
+
+* ```\<FitBounds>```:
+  [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
+* ```\<FitWorld>```:
+  [Leaflet on Mobile](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#Mobile),
+
+<br>
+
+* Dealing with events:
+  [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart),
+  [Leaflet on Mobile](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#Mobile),
+
 
 ___________________________________
 
@@ -312,3 +341,36 @@ Astro-leaflet is using [leaflet](https://github.com/Leaflet/Leaflet).
 leaflet is a BSD-2-Clause license software
 
 <br>
+
+___________________________________
+
+# <a name="Troubleshooting"></a> Troubleshooting
+
+## Map not displayed
+
+If the map is not displayed, and you have the following error in the console
+
+```
+Uncaught SyntaxError: The requested module '/node_modules/leaflet/dist/leaflet-src.js?v=c7414b9d' does not provide an export named 'layerGroup' (at layergroup.ts?v=c7414b9d:1:10)
+```
+
+or
+
+```
+SyntaxError: Importing binding name 'default' cannot be resolved by star
+
+```
+
+then you have to add the following inside ```astro.config.mjs```:
+
+```js
+export default defineConfig({
+  ...
+  vite: {
+    optimizeDeps: {
+      include: ['leaflet'],
+    }
+  },
+  ...
+});
+```
