@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { layerGroup as LlayerGroup } from "leaflet/dist/leaflet-src.esm"
+import { layerGroup as LlayerGroup } from "leaflet"
 import { getMapFromElement } from '../../index'
 import type { LayerGroup } from 'leaflet'
 import type { AstroLeafletLayerGroupType } from '../../index'

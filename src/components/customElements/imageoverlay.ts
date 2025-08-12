@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { imageOverlay as LimageOverlay } from "leaflet/dist/leaflet-src.esm"
+import { imageOverlay as LimageOverlay } from "leaflet"
 import type { AstroLeafletImageOverlayType } from '../../index'
 import type { ImageOverlay } from 'leaflet'
 import { getMapFromElement } from '../../index'

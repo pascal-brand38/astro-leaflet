@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { tileLayer as LtileLayer } from "leaflet/dist/leaflet-src.esm"
+import { tileLayer as LtileLayer } from "leaflet"
 import type { AstroLeafletTileLayerType } from '../../index'
 import type { TileLayer } from 'leaflet'
 import { getMapFromElement } from '../../index'

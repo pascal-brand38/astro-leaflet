@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { polyline as Lpolyline } from "leaflet/dist/leaflet-src.esm"
+import { polyline as Lpolyline } from "leaflet"
 import type { AstroLeafletPolylineType } from '../../index'
 import type { Polyline } from 'leaflet'
 import { getMapFromElement } from '../../index'

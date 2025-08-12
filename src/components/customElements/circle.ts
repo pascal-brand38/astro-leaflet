@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { circle as Lcircle } from "leaflet/dist/leaflet-src.esm"
+import { circle as Lcircle } from "leaflet"
 import type { AstroLeafletCircleType } from '../../index'
 import type { Circle } from 'leaflet'
 import { getMapFromElement } from '../../index'

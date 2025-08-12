@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { control as Lcontrol } from "leaflet/dist/leaflet-src.esm"
+import { control as Lcontrol } from "leaflet"
 import { getMapFromElement, getControlLayerFromElement, getLayerGroupOrTileLayerFromElement } from '../../index'
 import type { Control } from 'leaflet'
 import type { AstroLeafletBaseLayerType, AstroLeafletOverlayType } from 'astro-leaflet'

@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { polygon as Lpolygon } from "leaflet/dist/leaflet-src.esm"
+import { polygon as Lpolygon } from "leaflet"
 import type { AstroLeafletPolygonType } from '../../index'
 import type { Polygon } from 'leaflet'
 import { getMapFromElement } from '../../index'

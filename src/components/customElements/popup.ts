@@ -1,7 +1,7 @@
 // Copyright (c) Pascal Brand
 // MIT License
 
-import { popup as Lpopup } from "leaflet/dist/leaflet-src.esm"
+import { popup as Lpopup } from "leaflet"
 import type { AstroLeafletPopupType } from '../../index'
 import type { Popup} from 'leaflet'
 import { getMapFromElement } from '../../index'
