@@ -110,7 +110,7 @@ export interface AstroLeafletCircleType {
   /** geographical point */
   latlng: LatLngExpression,
   /** leaflet options of the Circle: radius,... */
-  options?: CircleOptions,
+  options: CircleOptions,
 }
 
 /** arguments provided in ```<Polygon .../>```. */
