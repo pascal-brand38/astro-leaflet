@@ -159,7 +159,10 @@ const style = (providedStyle===undefined && className===undefined) ? 'width: 100
   // *** this ensures the components are created before getting fitbounds  ***
   import { CustomElementFitBounds } from './customElements/fitbounds'
   customElements.get('astro-leaflet-fitbounds') || customElements.define("astro-leaflet-fitbounds", CustomElementFitBounds);
+  import { CustomElementFitWorld } from './customElements/fitworld'
+  customElements.get('astro-leaflet-fitworld') || customElements.define("astro-leaflet-fitworld", CustomElementFitWorld);
+  import { CustomElementLocate } from './customElements/locate'
+  customElements.get('astro-leaflet-locate') || customElements.define("astro-leaflet-locate", CustomElementLocate);
   import { CustomElementPopup } from './customElements/popup'
   customElements.get('astro-leaflet-popup') || customElements.define("astro-leaflet-popup", CustomElementPopup);
-
 </script>

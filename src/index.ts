@@ -15,6 +15,7 @@ import type {
   ZoomPanOptions,
   PolylineOptions,
   PopupOptions,
+  LocateOptions,
 } from 'leaflet'
 import type { HTMLAttributes } from 'astro/types'
 
@@ -179,6 +180,12 @@ export interface AstroLeafletPopupType {
   open?: true | undefined
 }
 
+/** arguments provided in ```<Locate .../>```. */
+export interface AstroLeafletLocateType {
+  /** leaflet options of map.locate() */
+  options?: LocateOptions,
+}
+
 /** get leaflet map, whose element is inside this <xxx> (such as <astro-leaflet>, <astro-leaflet-layergroup>...) */
 function _getXXXFromElement(xxx: string[], el: HTMLElement | null): any | undefined {
   if (!el) {
@@ -241,5 +248,8 @@ export { default as Polyline } from './components/Polyline.astro'
 export { default as Polygon } from './components/Polygon.astro'
 
 export { default as Popup } from './components/Popup.astro'
+
 export { default as FitBounds } from './components/FitBounds.astro'
+export { default as FitWorld } from './components/FitWorld.astro'
+export { default as Locate } from './components/Locate.astro'
 export { default as TileLayer } from './components/TileLayer.astro'

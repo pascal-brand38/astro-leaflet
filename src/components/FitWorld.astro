@@ -1,0 +1,18 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+//
+// Must be used in the <slot> part of <Leaflet>
+//
+// Example
+//    <Leaflet options={options}>
+//      <FitWorld/>
+//    </Leaflet>
+
+---
+
+<!-- dummy component to call the constructor of the custom element astro-leaflet-fitworld,
+     which is defined in Leaflet.astro -->
+<astro-leaflet-fitworld>
+  <slot />
+</astro-leaflet-fitworld>
