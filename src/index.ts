@@ -6,7 +6,7 @@ import type {
   Control,
   LatLngExpression,
   MarkerOptions,
-  DivIconOptions,
+  DivIconOptions, Icon,
   Map, MapOptions,
   ImageOverlayOptions,
   LayerGroup,
@@ -231,7 +231,6 @@ export function getLayerGroupOrTileLayerFromElement(el: HTMLElement | null): Lay
 export function getControlLayerFromElement(el: HTMLElement | null): Control.Layers | undefined {
   return _getXXXFromElement([ 'ASTRO-LEAFLET-CONTROLLAYER' ], el)
 }
-
 
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
