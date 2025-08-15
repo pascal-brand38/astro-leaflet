@@ -13,6 +13,6 @@ type Props = AstroLeafletGeoJsonType
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-geojson,
      which is defined in Leaflet.astro -->
-<astro-leaflet-geojson data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-geojson id={Astro.props.id || ''} data-props={JSON.stringify(Astro.props)} >
   <slot />
 </astro-leaflet-geojson>

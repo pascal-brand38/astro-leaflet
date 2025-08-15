@@ -194,6 +194,9 @@ export interface AstroLeafletGeoJsonType {
 
   /** leaflet options of geoJson: style,... */
   options?: GeoJSONOptions,
+
+  /** id, in case we need to get the leaflet created element using getLeafletFromId() */
+  id?: string,
 }
 
 
@@ -242,6 +245,13 @@ export function getLayerGroupOrTileLayerFromElement(el: HTMLElement | null): Lay
 }
 export function getControlLayerFromElement(el: HTMLElement | null): Control.Layers | undefined {
   return _getXXXFromElement([ 'ASTRO-LEAFLET-CONTROLLAYER' ], el)
+}
+export function getLeafletFromId(id: string): any | undefined {
+  const el: CustomElementLeafletGeneric | undefined = document.getElementById(id) as CustomElementLeafletGeneric | undefined
+  if (el) {
+    return el.leafletElement
+  }
+  return undefined
 }
 
 /** export astro components */
