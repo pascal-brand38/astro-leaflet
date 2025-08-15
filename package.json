@@ -35,11 +35,7 @@
   },
   "keywords": [
     "leaflet",
-    "withastro",
-    "astro-component",
-    "map",
-    "Google Map",
-    "googlemap",
-    "openstreetmap"
+    "withastro", "astro-component", "image",
+    "map", "Google Map", "googlemap", "openstreetmap", "michelin"
   ]
 }
