@@ -142,6 +142,8 @@ const style = (providedStyle===undefined && className===undefined) ? 'width: 100
 
   import { CustomElementCircle } from './customElements/circle'
   customElements.get('astro-leaflet-circle') || customElements.define("astro-leaflet-circle", CustomElementCircle);
+  import { CustomElementGeoJson } from './customElements/geojson'
+  customElements.get('astro-leaflet-geojson') || customElements.define("astro-leaflet-geojson", CustomElementGeoJson);
   import { CustomElementPolygon } from './customElements/polygon'
   customElements.get('astro-leaflet-polygon') || customElements.define("astro-leaflet-polygon", CustomElementPolygon);
   import { CustomElementPolyline } from './customElements/polyline'

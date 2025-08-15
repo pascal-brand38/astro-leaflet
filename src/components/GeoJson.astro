@@ -1,0 +1,18 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+//
+// Represents a GeoJSON object or an array of GeoJSON objects.
+// Allows you to parse GeoJSON data and display it on the map. Extends FeatureGroup.
+// https://leafletjs.com/reference.html#geojson
+import type { AstroLeafletGeoJsonType } from '../index'
+
+type Props = AstroLeafletGeoJsonType
+
+---
+
+<!-- dummy component to call the constructor of the custom element astro-leaflet-geojson,
+     which is defined in Leaflet.astro -->
+<astro-leaflet-geojson data-props={JSON.stringify(Astro.props)} >
+  <slot />
+</astro-leaflet-geojson>

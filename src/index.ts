@@ -4,6 +4,7 @@
 import type {
   CircleOptions,
   Control,
+  GeoJSONOptions, geojson,
   LatLngExpression,
   MarkerOptions,
   DivIconOptions, Icon,
@@ -186,6 +187,17 @@ export interface AstroLeafletLocateType {
   options?: LocateOptions,
 }
 
+/** arguments provided in ```<GeoJson .../>```. */
+export interface AstroLeafletGeoJsonType {
+  /** geo json object to be passed */
+  geojson?: geojson.GeoJsonObject | geojson.GeoJsonObject[],
+
+  /** leaflet options of geoJson: style,... */
+  options?: GeoJSONOptions,
+}
+
+
+
 /** get leaflet map, whose element is inside this <xxx> (such as <astro-leaflet>, <astro-leaflet-layergroup>...) */
 function _getXXXFromElement(xxx: string[], el: HTMLElement | null): any | undefined {
   if (!el) {
@@ -241,6 +253,7 @@ export { default as Overlay } from './components/Overlay.astro'
 export { default as CreateLeafletIcon } from './components/CreateLeafletIcon.astro'
 
 export { default as Circle } from './components/Circle.astro'
+export { default as GeoJson } from './components/GeoJson.astro'
 export { default as ImageOverlay } from './components/ImageOverlay.astro'
 export { default as Marker } from './components/Marker.astro'
 export { default as Polyline } from './components/Polyline.astro'
