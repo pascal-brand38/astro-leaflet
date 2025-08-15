@@ -4,7 +4,7 @@
 import type {
   CircleOptions,
   Control,
-  GeoJSONOptions, geojson,
+  GeoJSONOptions,
   LatLngExpression,
   MarkerOptions,
   DivIconOptions, Icon,
@@ -18,6 +18,8 @@ import type {
   PopupOptions,
   LocateOptions,
 } from 'leaflet'
+import type * as geojson from "geojson";
+
 import type { HTMLAttributes } from 'astro/types'
 
 import type { LayerNamesType } from './layerFromName'
