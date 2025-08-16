@@ -256,9 +256,13 @@ to the full demo and code:
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
 * ```\<Polygon>```:
   [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart)
+* ```\<GeoJson>```:
+  [Interactive Choropleth Map](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#Choropleth),
 
 <br>
 
+* ```\<ControlLayer>```:
+  [Interactive Choropleth Map](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#Choropleth),
 * ```\<ControlLayer>```:
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
 * ```\<LayerGroup>```:
@@ -282,8 +286,9 @@ to the full demo and code:
 <br>
 
 * Dealing with events:
-  [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart),
-  [Leaflet on Mobile](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#Mobile),
+  * [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart),
+  * [Leaflet on Mobile](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#Mobile),
+  * [Interactive Choropleth Map](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#Choropleth),
 
 
 ___________________________________
