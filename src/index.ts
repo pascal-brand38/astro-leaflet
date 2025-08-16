@@ -3,7 +3,7 @@
 
 import type {
   CircleOptions,
-  Control,
+  Control, ControlOptions,
   GeoJSONOptions,
   LatLngExpression,
   MarkerOptions,
@@ -145,6 +145,15 @@ interface _AstroLeafletTileLayerByUrlType extends _AstroLeafletTileLayerOptionsT
   tileByName?: never,
 }
 
+/** arguments provided in ```<Control .../>```. */
+export interface AstroLeafletControlType {
+  /** id to get the control */
+  id?: string,
+
+  /** leaflet options of the layer group: attribution,... */
+  options?: ControlOptions,
+}
+
 /** arguments provided in ```<TileLayer .../>```. */
 export type AstroLeafletTileLayerType = _AstroLeafletTileLayerByNameType | _AstroLeafletTileLayerByUrlType
 
@@ -258,6 +267,7 @@ export function getLeafletFromId(id: string): any | undefined {
 
 /** export astro components */
 export { default as Leaflet } from './components/Leaflet.astro'
+export { default as Control } from './components/Control.astro'
 export { default as ControlLayer } from './components/ControlLayer.astro'
 export { default as LayerGroup } from './components/LayerGroup.astro'
 export { default as BaseLayer } from './components/BaseLayer.astro'

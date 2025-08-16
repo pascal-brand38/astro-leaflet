@@ -135,7 +135,8 @@ const style = (providedStyle===undefined && className===undefined) ? 'width: 100
   import { CustomElementTileLayer } from './customElements/tilelayer'
   customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
 
-  import { CustomElementControlLayer, CustomElementBaseLayer, CustomElementOverlay } from './customElements/controllayer'
+  import { CustomElementControl, CustomElementControlLayer, CustomElementBaseLayer, CustomElementOverlay } from './customElements/control'
+  customElements.get('astro-leaflet-control') || customElements.define("astro-leaflet-control", CustomElementControl);
   customElements.get('astro-leaflet-controllayer') || customElements.define("astro-leaflet-controllayer", CustomElementControlLayer);
   customElements.get('astro-leaflet-baselayer') || customElements.define("astro-leaflet-baselayer", CustomElementBaseLayer);
   customElements.get('astro-leaflet-overlay') || customElements.define("astro-leaflet-overlay", CustomElementOverlay);
