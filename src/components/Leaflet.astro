@@ -48,17 +48,15 @@ if (enrichedProps.options.tileByName) {
 
 setDefaultProps(enrichedProps)
 
-const {
+let {
   options,
   id= 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),
-  style: providedStyle,
   class: className,
   ...props
 } = enrichedProps
 
-// if neither style nor class is provided, set a style so that the map is displayed
-const style = (providedStyle===undefined && className===undefined) ? 'width: 100%; height: 50vh;' : (providedStyle || '')
-//const style = (!providedStyle && !className) ? 'width: 100%; height: 50vh;' : (providedStyle || '')
+// use default size, apart if redefined
+className = className ? `astro-leaflet-size-kjghsdc` : `astro-leaflet-size-kjghsdc ${className}`
 
 ---
 
@@ -66,7 +64,7 @@ const style = (providedStyle===undefined && className===undefined) ? 'width: 100
   data-id={id}
   data-options={JSON.stringify(options)}
 >
-  <div id={id} style={style} class={className} {...props}>
+  <div id={id} class={className} {...props}>
   </div>
   {
     options.markers && options.markers.map(marker => (
@@ -169,3 +167,10 @@ const style = (providedStyle===undefined && className===undefined) ? 'width: 100
   import { CustomElementPopup } from './customElements/popup'
   customElements.get('astro-leaflet-popup') || customElements.define("astro-leaflet-popup", CustomElementPopup);
 </script>
+
+<style is:global>
+  .astro-leaflet-size-kjghsdc {
+    width: 100%;
+    height: 50vh;
+  }
+</style>
