@@ -19,10 +19,11 @@ export function getAstroLeafletMarkerDefaultIcon() {
       iconAnchor: [12, 41],
       popupAnchor: [2, -40],
       iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.0/dist/images/marker-icon-2x.png',
-      iconUrl: 'https://unpkg.com/leaflet@1.9.0/dist/images/marker-shadow.png',
+      iconUrl: 'https://unpkg.com/leaflet@1.9.0/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.0/dist/images/marker-shadow.png',
     })
   }
 
   return _astroLeafletMarkerDefaultIcon
 }
+
