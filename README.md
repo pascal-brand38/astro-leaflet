@@ -373,9 +373,17 @@ export default defineConfig({
   ...
   vite: {
     optimizeDeps: {
-      include: ['leaflet'],
+      include: ['astro-leaflet > leaflet'],
     }
   },
   ...
 });
 ```
+
+According to [vite](https://vite.dev/config/dep-optimization-options.html#optimizedeps-exclude)
+> CommonJS dependencies should not be excluded from optimization. If an ESM dependency is
+> excluded from optimization, but has a nested CommonJS dependency, the CommonJS dependency
+> should be added to optimizeDeps.include.
+
+Leaflet 2.x will be ESM. It is still in alpha release at the time of writing, so
+astro-leaflet is using 1.9 version which is CommonJS.
