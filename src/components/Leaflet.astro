@@ -48,15 +48,12 @@ if (enrichedProps.options.tileByName) {
 
 setDefaultProps(enrichedProps)
 
-let {
+const {
   options,
   id= 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),
-  class: className,
+  class: className= null,
   ...props
 } = enrichedProps
-
-// use default size, apart if redefined
-className = className ? `astro-leaflet-size-kjghsdc` : `astro-leaflet-size-kjghsdc ${className}`
 
 ---
 
@@ -64,7 +61,7 @@ className = className ? `astro-leaflet-size-kjghsdc` : `astro-leaflet-size-kjghs
   data-id={id}
   data-options={JSON.stringify(options)}
 >
-  <div id={id} class={className} {...props}>
+  <div id={id} class:list={['astro-leaflet-size-kjghsdc', className]} {...props}>
   </div>
   {
     options.markers && options.markers.map(marker => (
