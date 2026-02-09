@@ -1,0 +1,37 @@
+# Copyright (c) Pascal Brand
+# MIT License
+#
+# from https://docs.github.com/fr/get-started/git-basics/configuring-git-to-handle-line-endings?platform=linux
+# Ensure consistent line endings for text files
+#
+# check line endings using
+#    git ls-files --eol
+# check file that have the wrong line endings using
+#    git ls-files --eol | grep crlf
+#
+# normalize all line endings following the rules in this file using
+#    git add --renormalize .
+
+text=lf
+
+# Declare files that will always have LF line endings on checkout.
+*.astro text text
+*.css text text
+*.md text text
+*.js text text
+*.jsx text text
+*.json text text
+*.jsonc text text
+*.html text text
+*.mjs text text
+*.ts text text
+*.tsx text text
+*.sh text text
+*.svg text text
+*.txt text text
+*.xml text text
+*.yml text text
+*.yaml text text
+*.tsconfig text text
+*.env text text
+*.env.* text text
