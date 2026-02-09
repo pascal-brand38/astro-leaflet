@@ -32,6 +32,20 @@ Get the latest version from NPM:
 $ npm install astro-leaflet
 ```
 
+Once installed, please add the following in ```astro.config.mjs``` file as detailed
+in the [troubleshooting section](#troubleshooting):
+```js
+export default defineConfig({
+  ...
+  vite: {
+    optimizeDeps: {
+      include: ['astro-leaflet > leaflet'],
+    }
+  },
+  ...
+});
+```
+
 <br>
 
 ___________________________________
