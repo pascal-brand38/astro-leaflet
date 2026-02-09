@@ -1,0 +1,8 @@
+# Directories
+.github
+.changeset
+dist
+node_modules
+
+# Files
+package-lock.json
