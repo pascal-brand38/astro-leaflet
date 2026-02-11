@@ -18,32 +18,32 @@
 //      <Polyline latlngs={data as LatLngTuple[]} options={{color: 'red'}} />
 //    </Leaflet>
 
-import type { TileLayerOptions } from 'leaflet'
-import type { AstroLeafletTileLayerType } from '../index'
-import type { LayerNamesType } from '../layerFromName'
-import { getLayerOptionsFromName, mergeTileLayerOptions, } from '../layerFromName'
+import type { TileLayerOptions } from 'leaflet';
+import type { AstroLeafletTileLayerType } from '../index';
+import type { LayerNamesType } from '../layerFromName';
+import { getLayerOptionsFromName, mergeTileLayerOptions } from '../layerFromName';
 
-type Props = AstroLeafletTileLayerType
+type Props = AstroLeafletTileLayerType;
 
 interface _AstroLeafletTileLayerAllOptionsType {
   // we must have urlTemplate, and optionaly tileByName
   // if tileByName is provided, urlTemple will be guessed
-  urlTemplate: string,
-  tileByName?: LayerNamesType,
-  options?: TileLayerOptions,
+  urlTemplate: string;
+  tileByName?: LayerNamesType;
+  options?: TileLayerOptions;
 }
 
-const enrichedProps: _AstroLeafletTileLayerAllOptionsType = Astro.props as _AstroLeafletTileLayerAllOptionsType
+const enrichedProps: _AstroLeafletTileLayerAllOptionsType =
+  Astro.props as _AstroLeafletTileLayerAllOptionsType;
 if (enrichedProps.tileByName) {
-  const layerFromName = getLayerOptionsFromName(enrichedProps.tileByName)
-  enrichedProps.urlTemplate = layerFromName.tileLayer
-  enrichedProps.options = mergeTileLayerOptions(enrichedProps.options, layerFromName.options)
+  const layerFromName = getLayerOptionsFromName(enrichedProps.tileByName);
+  enrichedProps.urlTemplate = layerFromName.tileLayer;
+  enrichedProps.options = mergeTileLayerOptions(enrichedProps.options, layerFromName.options);
 }
-
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-tilelayer,
      which is defined in Leaflet.astro -->
-<astro-leaflet-tilelayer data-props={JSON.stringify(enrichedProps)} >
+<astro-leaflet-tilelayer data-props={JSON.stringify(enrichedProps)}>
   <slot />
 </astro-leaflet-tilelayer>

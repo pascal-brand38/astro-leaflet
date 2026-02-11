@@ -3,14 +3,13 @@
 // MIT License
 //
 
-import type { AstroLeafletLocateType } from '../index'
+import type { AstroLeafletLocateType } from '../index';
 
-type Props = AstroLeafletLocateType
-
+type Props = AstroLeafletLocateType;
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-locate,
      which is defined in Leaflet.astro -->
-<astro-leaflet-locate data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-locate data-props={JSON.stringify(Astro.props)}>
   <slot />
 </astro-leaflet-locate>

@@ -6,14 +6,13 @@
 // It's an approximation and starts to diverge from a real circle
 // closer to poles (due to projection distortion).
 
-import type { AstroLeafletCircleType } from '../index'
+import type { AstroLeafletCircleType } from '../index';
 
-type Props = AstroLeafletCircleType
-
+type Props = AstroLeafletCircleType;
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-circle,
      which is defined in Leaflet.astro -->
-<astro-leaflet-circle data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-circle data-props={JSON.stringify(Astro.props)}>
   <slot />
 </astro-leaflet-circle>

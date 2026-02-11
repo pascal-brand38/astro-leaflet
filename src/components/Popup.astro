@@ -4,14 +4,13 @@
 //
 // drawing popup overlays on a map.
 
-import type { AstroLeafletPopupType } from '../index'
+import type { AstroLeafletPopupType } from '../index';
 
-type Props = AstroLeafletPopupType
-
+type Props = AstroLeafletPopupType;
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-popup,
      which is defined in Leaflet.astro -->
-<astro-leaflet-popup data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-popup data-props={JSON.stringify(Astro.props)}>
   <slot />
 </astro-leaflet-popup>

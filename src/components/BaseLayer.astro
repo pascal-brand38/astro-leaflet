@@ -2,14 +2,13 @@
 // Copyright (c) Pascal Brand
 // MIT License
 //
-import type { AstroLeafletBaseLayerType } from '../index'
+import type { AstroLeafletBaseLayerType } from '../index';
 
-type Props = AstroLeafletBaseLayerType
-
+type Props = AstroLeafletBaseLayerType;
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-baselayer,
      which is defined in Leaflet.astro -->
-<astro-leaflet-baselayer data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-baselayer data-props={JSON.stringify(Astro.props)}>
   <slot />
 </astro-leaflet-baselayer>

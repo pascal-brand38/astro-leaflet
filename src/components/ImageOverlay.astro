@@ -4,14 +4,13 @@
 //
 // Used to load and display a single image over specific bounds of the map.
 // https://leafletjs.com/reference.html#imageoverlay
-import type { AstroLeafletImageOverlayType } from '../index'
+import type { AstroLeafletImageOverlayType } from '../index';
 
-type Props = AstroLeafletImageOverlayType
-
+type Props = AstroLeafletImageOverlayType;
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-imageoverlay,
      which is defined in Leaflet.astro -->
-<astro-leaflet-ImageOverlay data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-ImageOverlay data-props={JSON.stringify(Astro.props)}>
   <slot />
-</astro-leaflet-imageoverlay>
+</astro-leaflet-ImageOverlay>

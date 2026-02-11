@@ -5,14 +5,13 @@
 // Represents a GeoJSON object or an array of GeoJSON objects.
 // Allows you to parse GeoJSON data and display it on the map. Extends FeatureGroup.
 // https://leafletjs.com/reference.html#geojson
-import type { AstroLeafletGeoJsonType } from '../index'
+import type { AstroLeafletGeoJsonType } from '../index';
 
-type Props = AstroLeafletGeoJsonType
-
+type Props = AstroLeafletGeoJsonType;
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-geojson,
      which is defined in Leaflet.astro -->
-<astro-leaflet-geojson id={Astro.props.id || ''} data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-geojson id={Astro.props.id || ''} data-props={JSON.stringify(Astro.props)}>
   <slot />
 </astro-leaflet-geojson>

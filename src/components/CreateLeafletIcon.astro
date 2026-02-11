@@ -16,12 +16,11 @@
 //    	}
 //    </style>
 
-import type { AstroLeafletCreateIconType } from '../index'
+import type { AstroLeafletCreateIconType } from '../index';
 
-type Props = AstroLeafletCreateIconType
-
+type Props = AstroLeafletCreateIconType;
 ---
 
 <!-- dummy component to call the constructor of the custom element create-leaflet-divicon,
      which is defined in Leaflet.astro -->
-<create-leaflet-divicon data-props={JSON.stringify(Astro.props)} />
+<create-leaflet-divicon data-props={JSON.stringify(Astro.props)}></create-leaflet-divicon>

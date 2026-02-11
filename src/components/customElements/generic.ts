@@ -2,5 +2,5 @@
 // MIT License
 
 export class CustomElementLeafletGeneric extends HTMLElement {
-  leafletElement: any | undefined
+  leafletElement: any | undefined;
 }

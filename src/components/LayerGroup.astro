@@ -8,18 +8,16 @@
 //
 // cf https://leafletjs.com/reference.html#layergrouphttps://leafletjs.com/reference.html#layergroup
 
+import type { AstroLeafletLayerGroupType } from '../index';
 
-import type { AstroLeafletLayerGroupType } from '../index'
-
-type Props = AstroLeafletLayerGroupType
+type Props = AstroLeafletLayerGroupType;
 if (!Astro.props.id) {
-  Astro.props.id = 'astro-leaflet-layoutgroup-' + Math.random().toString(36).slice(2, 11)
+  Astro.props.id = 'astro-leaflet-layoutgroup-' + Math.random().toString(36).slice(2, 11);
 }
-
 ---
 
 <!-- dummy component to call the constructor of the custom element astro-leaflet-layergroup,
      which is defined in Leaflet.astro -->
-<astro-leaflet-layergroup id={Astro.props.id} data-props={JSON.stringify(Astro.props)} >
+<astro-leaflet-layergroup id={Astro.props.id} data-props={JSON.stringify(Astro.props)}>
   <slot />
 </astro-leaflet-layergroup>

@@ -14,89 +14,78 @@
 //    	}
 //    }}/>
 
-import Marker from './Marker.astro'
-import type { AstroLeafletType,  } from '../index'
-import { getLayerOptionsFromName, mergeTileLayerOptions } from '../layerFromName'
-import "leaflet/dist/leaflet.css"
+import Marker from './Marker.astro';
+import type { AstroLeafletType } from '../index';
+import { getLayerOptionsFromName, mergeTileLayerOptions } from '../layerFromName';
+import 'leaflet/dist/leaflet.css';
 
 // set default properties
 function setDefaultProps(props: AstroLeafletType) {
-  props.options = props.options || {}
-  props.options.tileLayerOptions = props.options.tileLayerOptions || {}
+  props.options = props.options || {};
+  props.options.tileLayerOptions = props.options.tileLayerOptions || {};
   if (!props.noDefault) {
-    props.options.center = props.options.center || [ 30, 7 ]
-    props.options.zoom = props.options.zoom || 2
+    props.options.center = props.options.center || [30, 7];
+    props.options.zoom = props.options.zoom || 2;
     if (!props.options.tileLayer) {
-      props.options.tileLayer = props.options.tileLayer || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      props.options.tileLayerOptions.subdomains = [ 'a', 'b', 'c' ]
-      props.options.tileLayerOptions.attribution = props.options.tileLayerOptions.attribution || "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+      props.options.tileLayer =
+        props.options.tileLayer || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+      props.options.tileLayerOptions.subdomains = ['a', 'b', 'c'];
+      props.options.tileLayerOptions.attribution =
+        props.options.tileLayerOptions.attribution ||
+        "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors";
     }
   }
 
-  props.options.markers = props.options.markers || []
+  props.options.markers = props.options.markers || [];
 }
 
-type Props = AstroLeafletType
+type Props = AstroLeafletType;
 
-const enrichedProps: AstroLeafletType = Astro.props
-enrichedProps.options = enrichedProps.options || {}
+const enrichedProps: AstroLeafletType = Astro.props;
+enrichedProps.options = enrichedProps.options || {};
 if (enrichedProps.options.tileByName) {
-  const layerFromName = getLayerOptionsFromName(enrichedProps.options.tileByName)
-  enrichedProps.options.tileLayer = layerFromName.tileLayer
-  enrichedProps.options.tileLayerOptions = mergeTileLayerOptions(enrichedProps.options.tileLayerOptions, layerFromName.options)
+  const layerFromName = getLayerOptionsFromName(enrichedProps.options.tileByName);
+  enrichedProps.options.tileLayer = layerFromName.tileLayer;
+  enrichedProps.options.tileLayerOptions = mergeTileLayerOptions(
+    enrichedProps.options.tileLayerOptions,
+    layerFromName.options,
+  );
 }
 
-setDefaultProps(enrichedProps)
+setDefaultProps(enrichedProps);
 
 const {
   options,
-  id= 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),
-  class: className= null,
+  id = 'astro-leaflet-' + Math.random().toString(36).slice(2, 11),
+  class: className = null,
   ...props
-} = enrichedProps
-
+} = enrichedProps;
 ---
 
-<astro-leaflet
-  data-id={id}
-  data-options={JSON.stringify(options)}
->
-  <div id={id} class:list={['astro-leaflet-size-kjghsdc', className]} {...props}>
-  </div>
-  {
-    options.markers && options.markers.map(marker => (
-      <Marker {...marker} />
-    ))
-  }
-  <slot/>
+<astro-leaflet data-id={id} data-options={JSON.stringify(options)}>
+  <div id={id} class:list={['astro-leaflet-size-kjghsdc', className]} {...props}></div>
+  {options.markers && options.markers.map((marker) => <Marker {...marker} />)}
+  <slot />
 </astro-leaflet>
 
 <script>
-  import {
-    map as Lmap,
-    tileLayer as LtileLayer,
-  } from "leaflet"
-  import type {
-    AstroLeafletOptionsType,
-  } from '../index'
-  import type {
-    Map,
-  } from 'leaflet'
-
+  import { map as Lmap, tileLayer as LtileLayer } from 'leaflet';
+  import type { AstroLeafletOptionsType } from '../index';
+  import type { Map } from 'leaflet';
 
   class CustomElementAstroLeaflet extends HTMLElement {
     /** The map, once created. Can be accessed using    getMapFromId(id),
      * which is summarized by                           document.getElementById(id).leafletElement
      */
-    leafletElement: Map | undefined
+    leafletElement: Map | undefined;
 
     constructor() {
-      super()
-      const options: AstroLeafletOptionsType = JSON.parse(this.dataset.options!)
-      const id: string = this.dataset.id!
-      this.leafletElement = undefined
+      super();
+      const options: AstroLeafletOptionsType = JSON.parse(this.dataset.options!);
+      const id: string = this.dataset.id!;
+      this.leafletElement = undefined;
 
-      this.createMap(id, options)
+      this.createMap(id, options);
 
       // create the map only when the document is loaded,
       // so that markers are created.
@@ -110,59 +99,82 @@ const {
       // })
     }
 
-    createMap(id: string, options:AstroLeafletOptionsType) {
-      let map = Lmap(id, options.mapOptions)
+    createMap(id: string, options: AstroLeafletOptionsType) {
+      let map = Lmap(id, options.mapOptions);
 
       if (options.center) {
-        map.setView(options.center, options.zoom, options.setViewOptions)
+        map.setView(options.center, options.zoom, options.setViewOptions);
       }
       if (options.tileLayer) {
-        LtileLayer(options.tileLayer!, options.tileLayerOptions).addTo(map)
+        LtileLayer(options.tileLayer!, options.tileLayerOptions).addTo(map);
       }
       // save the map
-      this.leafletElement = map
+      this.leafletElement = map;
     }
   }
-  customElements.get('astro-leaflet') || customElements.define("astro-leaflet", CustomElementAstroLeaflet);
+  customElements.get('astro-leaflet') ||
+    customElements.define('astro-leaflet', CustomElementAstroLeaflet);
 
-  import { CustomElementLayerGroup } from './customElements/layergroup'
-  customElements.get('astro-leaflet-layergroup') || customElements.define("astro-leaflet-layergroup", CustomElementLayerGroup);
-  import { CustomElementTileLayer } from './customElements/tilelayer'
-  customElements.get('astro-leaflet-tilelayer') || customElements.define("astro-leaflet-tilelayer", CustomElementTileLayer);
+  import { CustomElementLayerGroup } from './customElements/layergroup';
+  customElements.get('astro-leaflet-layergroup') ||
+    customElements.define('astro-leaflet-layergroup', CustomElementLayerGroup);
+  import { CustomElementTileLayer } from './customElements/tilelayer';
+  customElements.get('astro-leaflet-tilelayer') ||
+    customElements.define('astro-leaflet-tilelayer', CustomElementTileLayer);
 
-  import { CustomElementControl, CustomElementControlLayer, CustomElementBaseLayer, CustomElementOverlay } from './customElements/control'
-  customElements.get('astro-leaflet-control') || customElements.define("astro-leaflet-control", CustomElementControl);
-  customElements.get('astro-leaflet-controllayer') || customElements.define("astro-leaflet-controllayer", CustomElementControlLayer);
-  customElements.get('astro-leaflet-baselayer') || customElements.define("astro-leaflet-baselayer", CustomElementBaseLayer);
-  customElements.get('astro-leaflet-overlay') || customElements.define("astro-leaflet-overlay", CustomElementOverlay);
+  import {
+    CustomElementControl,
+    CustomElementControlLayer,
+    CustomElementBaseLayer,
+    CustomElementOverlay,
+  } from './customElements/control';
+  customElements.get('astro-leaflet-control') ||
+    customElements.define('astro-leaflet-control', CustomElementControl);
+  customElements.get('astro-leaflet-controllayer') ||
+    customElements.define('astro-leaflet-controllayer', CustomElementControlLayer);
+  customElements.get('astro-leaflet-baselayer') ||
+    customElements.define('astro-leaflet-baselayer', CustomElementBaseLayer);
+  customElements.get('astro-leaflet-overlay') ||
+    customElements.define('astro-leaflet-overlay', CustomElementOverlay);
 
-  import { CustomElementCircle } from './customElements/circle'
-  customElements.get('astro-leaflet-circle') || customElements.define("astro-leaflet-circle", CustomElementCircle);
-  import { CustomElementGeoJson } from './customElements/geojson'
-  customElements.get('astro-leaflet-geojson') || customElements.define("astro-leaflet-geojson", CustomElementGeoJson);
-  import { CustomElementPolygon } from './customElements/polygon'
-  customElements.get('astro-leaflet-polygon') || customElements.define("astro-leaflet-polygon", CustomElementPolygon);
-  import { CustomElementPolyline } from './customElements/polyline'
-  customElements.get('astro-leaflet-polyline') || customElements.define("astro-leaflet-polyline", CustomElementPolyline);
+  import { CustomElementCircle } from './customElements/circle';
+  customElements.get('astro-leaflet-circle') ||
+    customElements.define('astro-leaflet-circle', CustomElementCircle);
+  import { CustomElementGeoJson } from './customElements/geojson';
+  customElements.get('astro-leaflet-geojson') ||
+    customElements.define('astro-leaflet-geojson', CustomElementGeoJson);
+  import { CustomElementPolygon } from './customElements/polygon';
+  customElements.get('astro-leaflet-polygon') ||
+    customElements.define('astro-leaflet-polygon', CustomElementPolygon);
+  import { CustomElementPolyline } from './customElements/polyline';
+  customElements.get('astro-leaflet-polyline') ||
+    customElements.define('astro-leaflet-polyline', CustomElementPolyline);
 
-  import { CustomElementCreateLeafletIcon, CustomElementMarker } from './customElements/marker'
-  customElements.get('create-leaflet-divicon') || customElements.define("create-leaflet-divicon", CustomElementCreateLeafletIcon);
-  customElements.get('astro-leaflet-marker') || customElements.define("astro-leaflet-marker", CustomElementMarker);
+  import { CustomElementCreateLeafletIcon, CustomElementMarker } from './customElements/marker';
+  customElements.get('create-leaflet-divicon') ||
+    customElements.define('create-leaflet-divicon', CustomElementCreateLeafletIcon);
+  customElements.get('astro-leaflet-marker') ||
+    customElements.define('astro-leaflet-marker', CustomElementMarker);
 
-  import { CustomElementImageOverlay } from './customElements/imageoverlay'
-  customElements.get('astro-leaflet-imageoverlay') || customElements.define("astro-leaflet-imageoverlay", CustomElementImageOverlay);
+  import { CustomElementImageOverlay } from './customElements/imageoverlay';
+  customElements.get('astro-leaflet-imageoverlay') ||
+    customElements.define('astro-leaflet-imageoverlay', CustomElementImageOverlay);
 
   // ***                               MANDATORY                           ***
   // *** fitbounds must be declared AFTER the leaflet components           ***
   // *** this ensures the components are created before getting fitbounds  ***
-  import { CustomElementFitBounds } from './customElements/fitbounds'
-  customElements.get('astro-leaflet-fitbounds') || customElements.define("astro-leaflet-fitbounds", CustomElementFitBounds);
-  import { CustomElementFitWorld } from './customElements/fitworld'
-  customElements.get('astro-leaflet-fitworld') || customElements.define("astro-leaflet-fitworld", CustomElementFitWorld);
-  import { CustomElementLocate } from './customElements/locate'
-  customElements.get('astro-leaflet-locate') || customElements.define("astro-leaflet-locate", CustomElementLocate);
-  import { CustomElementPopup } from './customElements/popup'
-  customElements.get('astro-leaflet-popup') || customElements.define("astro-leaflet-popup", CustomElementPopup);
+  import { CustomElementFitBounds } from './customElements/fitbounds';
+  customElements.get('astro-leaflet-fitbounds') ||
+    customElements.define('astro-leaflet-fitbounds', CustomElementFitBounds);
+  import { CustomElementFitWorld } from './customElements/fitworld';
+  customElements.get('astro-leaflet-fitworld') ||
+    customElements.define('astro-leaflet-fitworld', CustomElementFitWorld);
+  import { CustomElementLocate } from './customElements/locate';
+  customElements.get('astro-leaflet-locate') ||
+    customElements.define('astro-leaflet-locate', CustomElementLocate);
+  import { CustomElementPopup } from './customElements/popup';
+  customElements.get('astro-leaflet-popup') ||
+    customElements.define('astro-leaflet-popup', CustomElementPopup);
 </script>
 
 <style is:global>
