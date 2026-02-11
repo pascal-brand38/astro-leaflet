@@ -9,7 +9,6 @@ import type {
   LatLngExpression,
   MarkerOptions,
   DivIconOptions,
-  Icon,
   Map,
   MapOptions,
   ImageOverlayOptions,
@@ -26,7 +25,7 @@ import type * as geojson from 'geojson';
 import type { HTMLAttributes } from 'astro/types';
 
 import type { LayerNamesType } from './layerFromName';
-import { CustomElementLeafletGeneric } from './components/customElements/generic';
+import type { CustomElementLeafletGeneric } from './components/customElements/generic';
 
 /** Type to create an icon to be used in leaflet markers.
  * This type is used in ```<CreateLeafletIcon .../>```

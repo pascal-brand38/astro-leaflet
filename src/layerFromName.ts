@@ -152,11 +152,10 @@ export function getLayerOptionsFromName(name: LayerNamesType): LayerFromNameType
   if (name.startsWith('Google')) {
     const corresp = { satellite: 's', street: 'm', terrain: 'p', hybrid: 's,h' };
     let lyrs = '&lyrs=s'; // default is satellite view
-    let extra = '';
     let lang = ''; // default does not define any language
 
     if (searchParams.has('type')) {
-      const v = corresp[searchParams.get('type')!];
+      const v: string = corresp[searchParams.get('type') as keyof typeof corresp];
       if (v) {
         lyrs = `&lyrs=${v}`;
       }
@@ -207,11 +206,13 @@ export function mergeTileLayerOptions(
   /** options guessed by tileByName */
   guessedOptions: TileLayerOptions,
 ): TileLayerOptions {
-  if (!providedOptions) {
-    providedOptions = {};
-  }
+  type _keyOfTileLayerOptions = keyof TileLayerOptions;
+  let mergedOptions: TileLayerOptions = providedOptions || {};
   Object.keys(guessedOptions).forEach(
-    (key) => (providedOptions[key] = providedOptions[key] || guessedOptions[key]),
+    (key) =>
+      (mergedOptions[key as _keyOfTileLayerOptions] =
+        mergedOptions[key as _keyOfTileLayerOptions] ||
+        guessedOptions[key as _keyOfTileLayerOptions]),
   );
-  return providedOptions;
+  return mergedOptions;
 }

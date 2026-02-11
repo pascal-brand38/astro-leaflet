@@ -30,7 +30,7 @@ export class CustomElementControl extends HTMLElement {
         console.error('astro-leaflet <Control>: must have one and only one <div> in the slot');
       }
       if (children) {
-        this.leafletElement!.onAdd = (map) => children[0] as HTMLElement;
+        this.leafletElement!.onAdd = (_map) => children[0] as HTMLElement;
         this.leafletElement!.addTo(map);
       }
     }
