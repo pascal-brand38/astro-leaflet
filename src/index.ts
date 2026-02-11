@@ -296,6 +296,7 @@ export { default as Polygon } from './components/Polygon.astro';
 
 export { default as Popup } from './components/Popup.astro';
 
+export { default as OpenPopup } from './components/OpenPopup.astro';
 export { default as FitBounds } from './components/FitBounds.astro';
 export { default as FitWorld } from './components/FitWorld.astro';
 export { default as Locate } from './components/Locate.astro';

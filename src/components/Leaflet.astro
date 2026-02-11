@@ -175,6 +175,9 @@ const {
   import { CustomElementPopup } from './customElements/popup';
   customElements.get('astro-leaflet-popup') ||
     customElements.define('astro-leaflet-popup', CustomElementPopup);
+  import { CustomElementOpenPopup } from './customElements/openpopup';
+  customElements.get('astro-leaflet-openpopup') ||
+    customElements.define('astro-leaflet-openpopup', CustomElementOpenPopup);
 </script>
 
 <style is:global>
