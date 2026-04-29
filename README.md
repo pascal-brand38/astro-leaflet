@@ -401,3 +401,23 @@ According to [vite](https://vite.dev/config/dep-optimization-options.html#optimi
 
 Leaflet 2.x will be ESM. It is still in alpha release at the time of writing, so
 astro-leaflet is using 1.9 version which is CommonJS.
+
+## Using pnpm
+
+Some legacy code may contain direct access to leaflet API in script part or frontmatter,
+something like
+
+```jsx
+import L from "leaflet";
+import type { GeoJSON } from "leaflet";
+```
+
+Such a code is working fine with `npm`. However, when using `pnpm`, the leaflet API
+cannot be accessed directly (apart is `leaflet` is installed also).
+
+Instead, it is recommanded to import leaflet API from `astro-leaflet/leaflet`, such as
+
+```jsx
+import L from "astro-leaflet/leaflet";
+import type { GeoJSON } from "astro-leaflet/leaflet";
+```
