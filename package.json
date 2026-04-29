@@ -20,11 +20,16 @@
   },
   "homepage": "https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/",
   "exports": {
-    ".": "./index.ts",
-    "./client": "./src/client.ts"
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    },
+    "./client": "./src/client.ts",
+    "./leaflet": "./leaflet.ts"
   },
   "files": [
     "index.ts",
+    "leaflet.ts",
     "src/**"
   ],
   "dependencies": {
