@@ -1,0 +1,16 @@
+---
+// Copyright (c) Pascal Brand
+// MIT License
+//
+// drawing tooltip overlays on a map.
+
+import type { AstroLeafletTooltipType } from '../index';
+
+type Props = AstroLeafletTooltipType;
+---
+
+<!-- dummy component to call the constructor of the custom element astro-leaflet-tooltip,
+     which is defined in Leaflet.astro -->
+<astro-leaflet-tooltip data-props={JSON.stringify(Astro.props)}>
+  <slot />
+</astro-leaflet-tooltip>

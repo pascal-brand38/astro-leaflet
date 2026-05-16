@@ -18,6 +18,7 @@ import type {
   ZoomPanOptions,
   PolylineOptions,
   PopupOptions,
+  TooltipOptions,
   LocateOptions,
 } from 'leaflet';
 import type * as geojson from 'geojson';
@@ -196,6 +197,21 @@ export interface AstroLeafletPopupType {
   open?: true | undefined;
 }
 
+/** arguments provided in ```<Tooltip .../>```. */
+export interface AstroLeafletTooltipType {
+  /** name of the overlay checkbox button */
+  content: string;
+
+  /** geographical point */
+  latlng?: LatLngExpression;
+
+  /** leaflet options of a tooltip */
+  options?: TooltipOptions;
+
+  /** true to open it on init */
+  open?: true | undefined;
+}
+
 /** arguments provided in ```<Locate .../>```. */
 export interface AstroLeafletLocateType {
   /** leaflet options of map.locate() */
@@ -295,6 +311,7 @@ export { default as Polyline } from './components/Polyline.astro';
 export { default as Polygon } from './components/Polygon.astro';
 
 export { default as Popup } from './components/Popup.astro';
+export { default as Tooltip } from './components/Tooltip.astro';
 
 export { default as OpenPopup } from './components/OpenPopup.astro';
 export { default as FitBounds } from './components/FitBounds.astro';

@@ -291,6 +291,7 @@ to the full demo and code:
 * ```\<Popup>```:
   [Leaflet Quick Start Guide](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet#QuickStart),
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
+* ```\<Tooltip>```:
 * ```\<FitBounds>```:
   [Layer Groups and Layers Control](https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/#LayerGroupsAndControl)
 * ```\<FitWorld>```:
